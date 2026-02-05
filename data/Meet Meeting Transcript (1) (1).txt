@@ -1,0 +1,332 @@
+Meet Meeting
+Tue, Jul 1, 2025
+
+1:15 - Unidentified Speaker
+Hey, how are you?
+
+1:41 - Dwayne Gibson
+Alicia, do you trim your mustache? What? What? Do you trim it, your mustache?
+
+1:50 - Elisha Abriham
+No, I don't. It just grows like that? Yeah. Yeah, it's like that.
+
+1:57 - Dwayne Gibson
+Mine grows like a bush all over my face.
+
+2:02 - Unidentified Speaker
+Oh, that's sad.
+
+2:04 - Afolabi Dave
+Hello, Dwayne.
+
+2:05 - Dwayne Gibson
+Hey, Apple Lobby.
+
+2:07 - Afolabi Dave
+How are you doing?
+
+2:10 - Dwayne Gibson
+Doing well, how are you?
+
+2:14 - Afolabi Dave
+Fine, thank you, and you?
+
+2:17 - Unidentified Speaker
+How's work? Good, it is good.
+
+2:22 - Elisha Abriham
+How are you, Alicia?
+
+2:25 - Unidentified Speaker
+It's nice to see you.
+
+2:29 - Afolabi Dave
+Hey, Uncle Avi, nice to see you.
+
+2:34 - Unidentified Speaker
+All right.
+
+2:35 - Dwayne Gibson
+Hey, Matthew.
+
+2:38 - Matthew Prisco
+Hello, everybody.
+
+2:40 - Matthew Prisco
+This is a party.
+
+2:43 - Afolabi Dave
+This is a party.
+
+2:46 - Dwayne Gibson
+Hey, Isaac.
+
+2:48 - Matthew Prisco
+Hello, Isaac. All right, just missing Hadi, I guess. Hello, everyone.
+
+2:57 - Isaac
+Yeah, this is fun.
+
+3:00 - Matthew Prisco
+Thank you. Do I need, did you message Hadi?
+
+4:28 - Unidentified Speaker
+I did.
+
+4:29 - Unidentified Speaker
+Let me check on him now.
+
+4:34 - Unidentified Speaker
+Okay.
+
+4:35 - Matthew Prisco
+We can get started, I guess, and he can join in. Since we got everybody. Here we go. Okay. All right. Full strength. Let's go. All right. So I've been kind of waiting for us to get but it finally feels like we can put everything we've been building with the MCP engine into daily use, or at least we can collectively all start to try so that we can identify where it's working, where it's not working. And I'm just gonna try on this call to sort of put it in context for how at least in the way I've been going about my own day-to-day work, it really involves a lot of copying and pasting. Here's what we currently have for this. Maybe we have some documentation of a softer page or a fill-out form. We've been making some progress Obviously, most of this team is working in N8n. We built the N8n Imaginator, was sort of the original workflow for what is now the MCP Engine, because we realized that the context part of that is really going to be the same regardless of which tool we're trying to run. It's the prompt that's different. I think we've mostly got the proof of concept that it can pull in the requested context using the tool run form. I think we are still going to need to debug that as different people are running a tool run and making sure that it's giving us the correct prompt and then underneath it, the requested context. And that at this point, even the JSON for the MCP engine itself should be used, whether it's Afolabi or Alicia who's debugging or just building new features. The whole purpose of this is to be able to leverage what we've already built and to use it in our day-to-day work so that an LLM that could maybe give you an idea of how to fix a problem, it may get that right. Sometimes the LLMs are impressive, but my hypothesis is if we give it documentation of what we've already built and then can supplement that with anything else that we would be helpful that it's going to do much, much better and that different types of projects are going to be helped out by different types of context. So just to kind of look at who's on the call, obviously Alicia and Afolabi are mainly working on N8n workflows. Isaac has kind of done a combination He's done work with Apps Script and then was directly working on the customer success workflow and a few other workflows. Now he's primarily testing our intake process and all of the workflows that Afolabi built to extract from documents, transform documents. So he's using And now during the testing, even the tools, the MCP engine, really should be a resource so that we can easily give, here's the current prompt, here's the issue that I'm trying to debug, here's the current JSON that we have, here's the current documentation in the Airtable standard format. The workflow as a whole and for each node and for the prompts. So kind of my ask for everyone is to be open-minded, to help us test this, to see really before you attempt any task, you should make sure that your LLM locally has been given whatever the best context would be for that task, and most of the prompts either are currently designed or will be designed so that you can copy and paste the prompt in the context. We're trying to broaden the prompts so that it's not specifically going to do something for you. It's going to be given our More general, and I'll talk about the N8N Imaginator since I guess it's the common thread here. The prompt, as I've edited it recently and as we will continue to edit, is given, here's your general concept, you're the N8N Imaginator. It's given what are the types of nodes. It could be given other best practices. Conventions, tricks and tips, whatever is useful. That would be in the knowledge of the imaginator, which would complement what the LLMs can already do. Then each of these prompts needs to have an explanation. You will be given context. Here are the context types. This will be standard to all of the MCP tool prompts is you could be given given a PCF, the prompt needs to explain that stands for project component feature and the level of detail or the type of information that that will contain. You might get a PRD, the product requirement document. We haven't made a lot of those. Actually, we're in the process of trying to make a prompt to give us a product requirement document. But the point is that the input or the context explanation is the same for each of these tools. We just need to standardize the explanation of here's the kind of context that you might be receiving. Then there's the output options. In the case of N8n, the prompt needs to know if we ask for it or when we ask for it. This is our Airtable documentation. Format for N8n, or it could be for the other tools, softer, fill out, or code. Give us code. It's easy. For the other ones where we've got Airtable, maybe it's the data dictionary has its own schema. So we need to say, here's the fields. Here's exactly how to complete each field. When the user requests, give me final documentation. Or give me updated documentation or whatever, give it to us in a way that can be copied and pasted or later on that we can think about how to send it directly into Airtable. That part doesn't even matter to me right now. We still need the proof of concept that we can get value from this whole process. In the case of the Enid and Imaginator, have a conversation. Here's the current, you've been given the current documentation. How do you think I can improve it? I need to build a new node, a new feature. What do you think I need to do? Okay, that sounds good. Give me updated JSON so I can review it. It may not be perfect. You may not be able to copy and paste it, but it probably should give you a lot more clarity or at least to where you can agree with the approach. Or if you say, I actually think it should do this, see if you can get Chad GPT to at least agree with you. So this really just becomes more of a mindset shift of, instead of going off and just trying to do the work, use the tool to get clarity around exactly what needs to be built because then this allows even Dwayne or me to use the same tool and to share the chat GPT conversation. I've started to do that a lot. I've been talking with Dwayne to see what LLMs are easy to share so that we could give to Alicia not just the problem here, this isn't working, but for the person who discovered the problem, should be using the tool to come to Alicia with at least the conversation, if not the solution. And that's just an example of if the same thing applied to a problem that we're having in the intake process. Or if Isaac says the benefit guide is really struggling with this, I or Isaac, whoever is going to use the tool, should pull in. The current prompt? What is the current JSON for that part of the automation? And can we get a good suggestion about how to fix it? Obviously, I'm saying a lot about the current JSON, so we have to actually use the N8N Imaginator to document what we've built in the Airtable format. And then we also need to go in and download the uh, the current Jason, uh, for each of the workflows. And I know that we're going to need to break up the Jason into because of the way we've put many workflows or what we would call a workflow on to one of what calls a workflow. We need somebody with the help of an LLM to break up the Jason that's associated with the benefit guide extractor to be separate from the JSON or to be separated so that we can store it separately from the JSON that's associated with the medical SBC or any of the other automations. So that in order for us to be able to make it easy to give that as a context type, we in data strategy. Same thing applies to the prompts. With where we're at at the process, there's only a few prompts that I really care about. Dwayne has made documents, Googled kind of docs for them, sharing them on different channels. That's been helpful to at least have somewhere to edit it. But the system of record really needs to be that data strategy base matches what's actually in N8n. The other documents, we don't need to maintain them. Once we get this all to a certain level where it's at least working, and then it becomes a question of how do we refine the prompts. Dwayne had a good idea for a set node so that when we run a prompt, if we have updated the prompt, different from what it currently has in Airtable, that it could automatically bring the new prompt. My approach to that is there's only six prompts that I care about right now. We're talking Data Definer, obviously, N8N Imaginator, Softer Drafter, Code Generator, PRD writer. Let's just have somebody gather those and put them right into Airtable and not go down the path of trying to update them automatically. In 20 minutes myself last night, I took the current version of the Imaginator and tried to get it to to have a little bit better structure. I think it added some value. I wasn't looking at it to try to perfect it. But that process of run the MCP engine, in that case, you could use Prompt Prompter, which will have additional best practices specific to prompts. Give it the current prompt. Give it the JSON for the workflows and maybe the documentation so that it has more context that's relevant, and then say, I want to improve this part of the prompt, or here is the other MCP prompt that we have got to the highest level. Let's say we like the N8N Imaginator prompt, but we haven't standardized the data definer in the same way. We want these prompts to feel very similar in structure, Because they do have the core of here's the context that you may be given. Here is your basic function. Here is your expert knowledge, which may be in the form of a best practices guide. Here's an explanation of the context you may be given. Here's your specific output format. And anything else that we determine is helpful so that the tools are usable with this human in the loop. I'm going to ask you for whatever I'm trying to solve. And at the end, or at some point in time, I may ask you for something structured. They all are doing that. So I think we would be able to use, here's our N8N Imaginator prompt. Here's our current PRD writer prompt. Try to standardize them. That would be using the prompt prompter. So some of these things, like I said, I was able to make a lot of progress in a short amount of time yesterday. The bottleneck is can we get everybody thinking about these the same way and using them the same way so that we can improve them as a unit and share those wins, share those best practices. Who's been using it as data definer? Who's been using it for, everybody here probably will use the N8N Imaginator in some way. How can Dwayne develop a process to, when he needs to make suggestions, run it on his end and then share the chat GPT? Or whatever LLM is easy to share. Those are the kinds of things that I'm really hoping we can all rally around. So that's kind of my pitch. Maybe I can hand it to Dwayne to see if he has anything he wants to add. No, yeah.
+
+21:21 - Dwayne Gibson
+So I think the sub takeaway is that we have tools that we have developed to a point that you believe Matthew, they are ready to assist us daily moving forward so that our momentum can increase exponentially using these tools. And I agree. I think that that basically rallies around appropriate LLM use. And I would just to everyone, and I feel like you guys do a good job of this already, but just to keep it in mind, that using the LLM appropriately is not a one-shot. Do not expect the correct or valuable response from throwing one thing into a prompt box and getting a return. It is a conversation, it is iteration, and the proper context plays a very large role. Proper context and proper prompt play a very large role in extracting value from these LLMs. So that would be my feedback. Keep that in mind. And I think, yeah, we can keep the momentum going.
+
+22:37 - Matthew Prisco
+And then I think there's probably, you know, four different freelancers on the call and probably four different approaches to how they're using their own LLM in doing their work and in communicating their work, what I would say to each of you is using the prompt plus context, running it, and putting it into your project channels. So if you have a channel for this and a channel for that, if you give it the prompt plus context and it has it, these are not instant use contexts or prompts. It's not that you need to ask for the document right then and there, I think that if you set up a new channel or a new project for each project and you're giving it what is the type of project, there's probably a prompt plus context that's going to be relevant. And if you start the project by giving it that, or if the project evolves and you need to add new context, if you give it that project folder, I think they're called, it's going to be able to give you that value in addition to however you've been using it, whether it's just tracking our Slack communication or, like I said, there's probably four people who are doing it in four different ways. If you think you found a really good way to do that and you want to share how the rest of the team could do it the same way, that'd be great. That's a part of this that I don't really have visibility into is how the freelancer side is leveraging AI. What I'm saying is here's how beta fits can leverage AI. Let's infuse this into everybody's day-to-day work.
+
+24:34 - Dwayne Gibson
+I would be curious to piggyback off of that, Matthew. I would be curious what LLM and what model, specifically LLM, everyone has found success with? And even more importantly, which ones do people suggest to stay away from that has shown deficits? Anyone?
+
+24:55 - Dwayne Gibson
+I think they keep pinging back and forth or leapfrogging each other.
+
+25:00 - Matthew Prisco
+One of the things that's important to me is which ones are shareable. So with this concept, of the person who had the idea should be doing more than just saying, hey, I need you to look into this. Give the approach. Give a possible solution that that person can then further interact with that same conversation. Ideally, I believe when I share chat GPT stuff, it takes it to the level that I took it and then you can continue that conversation from there. That's great. So yes, we do want to see which are good at solving these kinds of problems or giving us good solutions or direction, but also what is shareable and what is something that everybody else already has too, so that they can directly continue that conversation.
+
+26:03 - Hadi Ur Rehman
+Yeah, Hadi. So, based on my last few days experience with the Data Definer form, I have used multiple LMs such as GPT, Chats GPT, DeepSeek and Gemini and Twitter, but I found DeepSeek and Chats GPT more successful. But what I have done, my approach was, the last time where I got the most successful result, I provided prompt with the CSV file and I was explaining at each process like what exactly I need to do with some time with examples of the good field so it can give me good results and still I need to check it out on every time. But DeepSeek sometimes I think provides better results than ChatGPT with least amount of instructions. Because when I started, I just provided that data-defined prompt to DeepSeq and was given at least the results. And there were just mistakes, but there was no clear instruction, et cetera, et cetera.
+
+27:18 - Unidentified Speaker
+Is DeepSeq shareable?
+
+27:20 - Hadi Ur Rehman
+I haven't tried it yet because I just started using it.
+
+27:26 - Matthew Prisco
+That would be my feedback. C is, um, can you share it? Can the person who I think probably most people don't have deep seek set up. I think I had it set up, but I've never really played with it. Um, my guess is that other than that chat GPT probably has some restrictions on the free tiers and people may be on different models or, or maybe hard when I use chat GPT, I have the plus level. It has all of my sort of memory. It basically knows beta fits. So sometimes when I do the solution and I say, here guys, here's what we got to do. I need to sort of recognize that if you guys tried to do that from your own LLMs or from your open AI account, it's not going to do as good or it's not going to do as good with minimal context because it knows me. It knows beta fits at this That's where we would start to lean on Dwayne for some coordinating or for the project team, the core of the project team to, if not have a new open AI account that does know beta fits. And we use those and share those as opposed to having the conversation taking place on the local LLMs. What would our possibilities be there. That's down the line. We're still at the point where we just need to be seeing what we can get from the prompt plus context.
+
+29:03 - Dwayne Gibson
+Well, Matthew, he raised a really good point. And it's, I think it's key to our workflow is that he got better success attaching a file. Yeah. Instead of putting it through the prompt window and the LLM definitely process that information set a different way. One of the restrictions seeing is the LLM, uh, truncating the prompt, which it does through the window. So it might turn out to be a better value for our context to attach as a file. If we could find a way to do that instead of trying to slam it all in the, does that depend on the type of file?
+
+29:43 - Matthew Prisco
+Was this a CSV uploaded as context or was this a PDF? It was a CSV CSV. I think, and this is just because I'm not a programmer and JSON scares me, I would think that copying and pasting without JSON, I don't know how it would keep that straight. Maybe it's technically the same thing. If you copy and paste from a spreadsheet, which is what I've been doing, it can still kind of make sense of it. If you give it actual CSV, maybe it will do better. And possibly if you upload a CSV, it does even better because it doesn't have that mashed in with the rest of the context. So that could be something to try. I would think that, let's hope for now that giving it JSON as opposed to here's a table that's just copy and pasted with spaces. It still tends to get something out of that. But I'm hoping that if the prompt is given JSON in the context window, it can make sense of that. If that doesn't work, then we do start exploring how can we give the context as a JSON, sorry, as a CSV package. Maybe, but those to me are fine tuning type things. Let's just put this into out the front of our.
+
+31:17 - Dwayne Gibson
+I just I just threw that question really quick into a LLM because I think it is a massive difference, not even a big difference. And this is what it returned for anything longer than a few hundred lines. Attaching the file is almost always more reliable and cheaper than pasting JSON large table in the prompt because it avoids burning context token, preserves structure and unless the assistant stream or chunk load what it needs. Yep.
+
+31:44 - Matthew Prisco
+I think it also helps it focus on it because if you're taking the time to attach it, I mean, I think there's different algorithms where it's waiting the beginning of the prompt, the end of the prompt. I think that any attached file, obviously you're telling it this is important. I took the time to attach it. Yeah. But the other thing to keep in mind is that these are one-shot prompts, you can get the prompt plus context, and then still you can attach whatever you want in the next few messages. It doesn't all need to be done in the beginning. So if there is some very important context, we could manually upload those. We just need a way to get that in the CSV package. But let's see that goes. I think we should at least get some results from putting it in the context window. The thing that we need to be realistic is, like with the stuff I shared yesterday, I don't know who saw it, but I was trying to get the NADN Imaginator to document the MCP engine. The MCP engine has 115 nodes. It's not going to document 115 nodes all at once, but What I didn't test, and I hope that you guys can test, is what if we gave it the JSON and we said, document the first five nodes? Would it be able to do that even being given all of the JSON? Or rather, we give it the current version of the documentation, whatever it's given us, and then say, revise it. So if we're giving it some structure and it's just looking for where to fix it, I view this as here's our current JSON, here's our current documentation, almost as a given, and that's going to be more important than other types of context. It's just so that the LLM can have at its easy access what exactly we have built, not just generalities How could you build this? But it's going to take testing. So AlfaLobby, since I shared all of the first, I took the current Imaginator prompt and in five minutes tried to improve it. I think it got improved a little bit, but let's see what AlfaLobby thought about that. Then I gave it the new prompt plus the MCP engine and just kind of said, try to dock document it. I know it did poorly, but we're going to have to try that with a shorter workflow and with asking it for pieces. But then I said, here's the current workflow, here's the next few features that we need, and it seemed like it did better. So, Afolabi, can you kind of explain what your thoughts were on those three?
+
+34:51 - Afolabi Dave
+Okay. So, for the first part, where you say, okay, the prompt. I feel the way it improved the prompt is actually really ideal, like I said on my channel. Yes, it works. The prompt would actually work better. Also, I kind of realized something when I was working on a few things over the weekend. I feel the LLM nodes already have knowledge on anything. What do you call it? Anything's documentation in the sense that You don't necessarily have to give it all the nodes. I think Dwayne and Alicia were working on something like that. Correct me if I'm wrong, Dwayne. You don't have to give it all the nodes. It already has knowledge of each node and each operation. Now, all we just need to give it, just to make sure it is perfect, is to give it the core nodes. Core nodes for things like transformation. Some nodes are general. The LLM definitely have use for them, but there are some nodes that I'm very sure that the LNM has no idea they exist. And those are the most important nodes that I use on a daily basis. So we just need to add those particular nodes to the prompt to make sure the prompts, right. Or we could add them in a document, the best practice document.
+
+36:12 - Matthew Prisco
+So just to keep the prompt concise. I think what, what the, the prompt did on its own was it took the 140 node types and it broke them up into categories. It got rid of the description about what each node does. What was in the previous prompt was just a sentence anyway. I don't think it was giving the LLM any value that it doesn't already have. What it does give us value is whatever name we want to officially use for that node, I do think that it needs to mention the nodes and type or the name for the node type in the prompt in these categories of, I don't know how many categories it had, maybe eight. And just so that if it were to use that, it will call it the same thing, regardless of if we give it to chat GPT or Claude or any LLM, it has the instructions where these are available nodes. Yes, we can give it much further documentation. Of how to use the core nodes, even for our specific best practices for how to use those core nodes, our specific naming conventions. So something that I know what it must feel like to build this is you got to build a lot of nodes. Let's just get it started. I don't want you to be using brain power to think about how should we actually name this node to be consistent with everything else. But that's the perfect use case for run the N8N Imaginator before you start the workflow. Agree with it. It'll give you an initial plan. And then you can iterate from there. You can say, actually, on this part, I think we need this node. It'll say, you're right. I'm going to change it. So you come to an agreement with the LLM about what the structure is. And then at some point, you could ask it to document each of the nodes or, you know, all of the nodes or some section of the nodes so that you can share that with whoever else may need it. It could just be so you have it so that it gives you things that you're not thinking about. You're not thinking about how to name the node. You're just thinking about which node you need and how to configure it. It can do that for you. So like I said, I think that just by getting this into, especially off of lobby's hands, especially, you know, Alicia has been working on it, but I don't think he's been working with it, meaning working on the MCP engine, but using this approach to actually improve the MCP engine and to solve the problems that, that we're trying to debug. Alicia, do you have anything? To add? Does this conversation help?
+
+39:11 - Elisha Abriham
+Yeah, I was thinking about the documentation and I have used it before. Most of the time I use this JSON to the LLM. I put them and give me the documentation of this JSON. Then I will adjust the documentation if it has got the wrong way. Instead of documenting all of the JSONs, I give the suggestion to the LLM, then I will look at it. Then if there is any misunderstanding on the LLM, I will improve that. That's also possible. Or the other way, continue, Matthew.
+
+39:50 - Matthew Prisco
+I'm just agreeing with you. But I think in terms of next steps for where Alicia can help working on the MCP engine, if these are things that we can get a good solution from using the N8N Imaginator, that that would mean that either he can do it faster, less needing Afolabi to guide, or here's what I need to solve, I ran it through the N8N Imaginator, here's what it suggested, is gonna be a much easier conversation to have with Afolabi, or me for that matter. Of, I think this is the solution I want to build it. So we really need to think about how are we having these local LLM conversations and sharing them. That's why, you know, when Hadi mentioned DeepSeek, I have nothing against DeepSeek, but the shareability of that LLM is very important to the team aspect of this. The other part for Alicia, just while we're kind of on him and he mentioned it, the documentation. We've built a lot. I think that giving the existing JSON plus a PCF should be enough to get good documentation. If we had a PRD for that one, I would give it that too, to get the first draft of the documentation. So I'm looking at, Alicia can be helpful. Go to N8n, get the huge JSON file for the extractions workflow, break that up into what JSON is specific to each extraction, use that to do the basic documentation so that we can then use the first draft of the documentation even as the basis for improving it, just to get some Because right now we have basically nothing in terms of N8N documentation. Yesterday we added a prompts table. In the case of the MCP Engine is the perfect use case for we have one node that is supposed to be fed many prompts. So each of the prompts for each of the tools needs to be on the prompt table and then each of those prompts would get linked to that single very important node in the MCP engine that needs to be able to feed the different prompts. Obviously those prompts are living in N8n and the exchange is done there. I'm just saying that we need to manually copy and paste since we don't think there's a way to get metadata or workflow data out of the N8N API right now. I think it will be possible, but I just want Alicia or somebody to go in, copy and paste the current prompt into the prompt table, link it to that node. Obviously, we need to prioritize doing the documentation for the MCP engine as one of the first, even though it's one of the longest. And I'm looking at Alicia as primarily doing that. Alicia, does that all sound good? Does that do you kind of see what the process would be?
+
+43:33 - Elisha Abriham
+Yeah, I will share you the progress on the slack.
+
+43:37 - Dwayne Gibson
+You want that as a target for today for Alicia to get the prompts on the prompt table and then work on getting the MCP engine documentation on the other two tables. Correct.
+
+43:50 - Matthew Prisco
+I don't know if that's, I don't know how long it's going to take, but that I think should be other than if we find issues with the MCP engine itself, debugging, getting context that's going to hold up other people.
+
+44:06 - Matthew Prisco
+So I don't think it.
+
+44:08 - Matthew Prisco
+In practice, I think Alicia would be working on both of those. I'm just saying it's still important. We need to get at, I think somebody had mentioned the prompts aren't showing in the prompt plus output or plot prompt plus context. Obviously we need to fix that for anybody to be able to use the tools. So whoever's going to fix that.
+
+44:30 - Dwayne Gibson
+I brought that up and we can address that really quickly. It is not consistent. So like I was describing Matthew, I don't know if it's because someone is currently adjusting something in the workflow and it is a five minute just coincidence that I ran it while they are adjusting something or not. So that we need to either communicate that that situation will arise, or if it is just a random error that is happening, we need to identify that.
+
+44:59 - Matthew Prisco
+Yeah, well, I think that's going to be kind of your boots on the ground and Alicia and awful lobby if needed.
+
+45:08 - Dwayne Gibson
+I mean, it has to be Alicia and awful lobby.
+
+45:12 - Matthew Prisco
+Mean and with with Alicia and off-lobby as needed. I see Alicia.
+
+45:18 - Elisha Abriham
+Yeah Alicia question Okay, I was trying to the prompt the prompt part like using the LLM on anything meaning that if we are using the N18 imaginator if there is any note that needs are the prompt except that prompt only and the store on the prompt table. I was trying that, but I need the output. If you run the N18 Imaginator, you should have the output to see if there is an LLM node or not on that workflow. That was the issue. If you got me, I don't know what. That was the issue. We have to get the output first from the N18 Imaginator. On that output, if there is any LLM, you should have this prompt. Have you got my point what.
+
+46:12 - Matthew Prisco
+For me not not really, but I think that can be something that you and Dwayne hash out after the call.
+
+46:22 - Dwayne Gibson
+So I think Matt Matt presented an initiative to just manually copy and paste it. So I think that just completely redirects Alicia. So I think that's your first.
+
+46:35 - Matthew Prisco
+Did you already communicate that to try to get the prompts out.
+
+46:39 - Dwayne Gibson
+We tried it up until the meeting. So that was until the meeting tried.
+
+46:44 - Matthew Prisco
+So guys, I get that. I want automation too, but I just think this is a 10 minute fix of copy and paste the prompt into the table. And, and then we don't need that.
+
+46:56 - Dwayne Gibson
+So that is the first task for you, Alicia post meeting is to populate the prompt table.
+
+47:02 - Matthew Prisco
+And, and we need We need to get the whole MCP workflow. Unfortunately, it's humongous, but we're going to need to get that into the node table. And each of those prompts is going to be linked to that single node, you know, whatever. I think that one of the challenges just sidebar thought of documenting the nodes is what are reasonable numbers to give it because they can brand I don't know what what the best practice would be to number the nodes when it turns into like You know things that are looping and whatever anything that's reasonable we do need to have some way to organize it in air table, and I think that the Imaginator should help us organize in order Give some number that's not unreasonable when we do have the branching and and whatnot. So as we're going through this trying to get good documentation, we may need to give the N8N Imaginator prompt some additional guidance about when you're looking at the JSON in general, you probably should number the nodes based on how you encounter them in there. Even if it's not so apparent in how it appears in the canvas, Another thing that I've mentioned with Duane is in the workflow table, we should have screenshots of what it looks like in N8n. For these long workflows, it may take four or five screenshots so that it's not so small. Number them, MCP Engine 1, MCP Engine 2, so that we could give those screenshots as additional context. I don't think we I don't think it's as valuable as the JSON or as valuable as the documentation if we have those. But it's not a bad idea just as housekeeping that we would want to have a way to visualize what we've built, especially once we get it to a level where we're not changing it every day. So that's another thing that we put on those tables and that Alicia and anybody else who's doing the documentation would need to prioritize. Do we actually need to do this right now or is it good enough just to know it's on our roadmap and to do it as we go or do it later? So that's some more stuff. Let's talk maybe a little bit about Isaac and then we can do Hadi last. Isaac, obviously you've got the QA workflow that should be giving you some of this already. If you remember, I mentioned we should be giving it the JSON too. Obviously, we need to have the JSON in Airtable in order for it to do that. But I think that in your debugging, it probably takes one of two approaches. One is tweaking the prompt and two is tweaking the JSON configurations for the node. And really, I would use the QA node as guidance, and then it's giving you the possible solutions. See if you can have a chat GPT conversation. I think this could solve it. If you want to share that with Afolabi or Dwayne or me or everybody, you can do that. Just think it'll work, just do it. But your process of debugging, I think, would be enhanced by being able to have the current workflow for your extractor, whichever one you're testing, the current JSON for that, and whatever else is relevant is going to help you get not just the solution for how to fix that, but to draft the changes to the prompt or draft the JSON that might do better. Does that all make sense?
+
+51:26 - Isaac
+Yes, it makes sense. All right.
+
+51:28 - Matthew Prisco
+I know Isaac, when he says, yes, that makes sense, he means it 100% makes sense to him on many levels. So he doesn't need to explain it all to us. I just know he gets it. All right. So that's good. I think that will help us. As we want to get through all of the clients that we're taking through this test onboarding or test intake process, and then go back and do after we've gone through them and fix some things, now we run the same group again, delete everything except for the documents, and hopefully we'll go from 70% success with that group to now 95% running it. From scratch and maybe we'll get to where we feel comfortable with the prompts and the validation and everything. Okay. For Hadi, it's more of a mixed bag of what are all of the MCP tools. So, this is really important, Hadi, and this is, I think, what I tried to set up a few weeks ago when we had the call about the project portal and the master project's and what are the steps that we need to gather good context or to build what we need to have in the data strategy base to use not just the N8N Imaginator, which is really what everybody else is focused on right now, but how do we use the data definer? Well, we need to have the data dictionary for the relevant table needs to be created. With different freelancers, we also need to give them a process that they can use to do the basic documentation of their tables with the field types, what is the description of the field, the purpose of the field, the business context, all the stuff that we've gone through. We really have several people who are trying to do this with LLMs in spreadsheets but without the data definer prompt or without it having been tested out. So I think for Hadi, it's to use this as reinforcing, see what we already did for that data dictionary, see how we can then refine the data dictionary prompt use the prompt prompter to take whatever we've now put into whichever ones I've edited. I feel a little bit more comfortable than the ones that I haven't. So at this point I've edited the MCP a little bit. I edited the Imaginator. We need to get some consistency among the different prompts. That could be Alicia. I think that should also be in Hadi's workflows, because he's going to be at least using the tools, getting that baseline improvement to the prompt, and understanding what's making the successful prompts and what's lacking in the ones that we haven't standardized the same way, I do think Hadi can help. On the prompt side of that?
+
+55:02 - Unidentified Speaker
+Dwayne, what do you think?
+
+55:04 - Dwayne Gibson
+Yeah, I say we give it a shot.
+
+55:07 - Dwayne Gibson
+So we, you want to have Hadi do an assessment of every one of the MCP prompts, determine what is the common framework for them, and then decide which ones are at a acceptable level and how to bring the other ones up to that level.
+
+55:27 - Matthew Prisco
+I think how do you would do good at that?
+
+55:31 - Hadi Ur Rehman
+How do you, what do you think? Uh, yeah, like I'm also right now working on previous form to make it better. So I can just continue with all the MCP form.
+
+55:43 - Unidentified Speaker
+And I'm sorry. Go ahead, Hadi.
+
+55:45 - Hadi Ur Rehman
+Uh, no, basically I was just saying that I can start working on that and like, uh, just guide me on one thing. So you want like your one prompt that give us all that data or you like want the same process like me where I just talk with the LLM and get the better results?
+
+56:06 - Matthew Prisco
+The prompt for the tool is what it's going to give you with the prompt plus context. And we need to be running these and testing that we're getting the prompt, which it sounds like it's still sometimes yes, sometimes no. And then any other context that you're requesting, it's giving it to you. So, anybody who's using the tool, when you do a request, you need to check, is it actually giving me what I requested and not just assuming that it is. Once you paste it into DeepSeek or ChatGPT, again, ChatGPT, if DeepSeek is not easy to share. That's where you're now having a conversation. But the prompts, as you'll see when I think you study the ones that we like and the ones that we don't, it needs to say, at some point, the user may request final output. At some point, the user may request JSON. The prompt is almost giving the prompt the tool or knowledge of what to do when you tell it to do that. That's what I don't think the original prompts were designed to do and that's what a few sentences difference makes to where you give the prompt plus context and there's on the prompt on the tool run you can even give it special instructions. I want to compare this to this. I want to make the rest of the prompts you the prompt prompter tool that says you're a prompt prompt you know prompt engineer expert whatever it can say you give it that special use case of you're gonna get some context but I want you to help me standardize the prompt that we like and use the prompt that I'm working on giving it the current drafts of both of those prompts and then giving it those instructions you could give it those instructions when you run the tool run that's the additional instructions box or I don't think it would matter to the LLM if you post that hit enter and then it says wait I'm not sure what you want me to do and then you just go from there and you can have as much of a conversation with it as you want and then at any time you can ask it for documentation.
+
+58:37 - Dwayne Gibson
+So I got a question Matthew. Matthew so Are you saying that what we need to add to the prompt is a few sentences that puts it into conversation mode, or do you want the default prompt to already have a determined output? And if we change it, like some of them have multiple outputs, like it could give us the innate and imaginator can give us a list of nodes or it could give us the JSON. And I understand that we can say at any point, me the JSON. But is that what you want? The initial prompt, like if you just enter the prompt in context, the initial goal is a certain type of output?
+
+59:19 - Matthew Prisco
+No, I think, I think there's the, I think the terms are system prompt and user prompt. The system prompt is what we're designing. It doesn't give you what's going to happen with the message. It may, we could have a default, which would copy pasting, we don't need any, we don't need to give it all the instructions. So the user prompt should be what you're telling it, you are giving it and what to do with it. So you're giving it all of this context, the user prompt and the prompt probably should highlight this, give special attention to what is put in these special instructions or whatever we're calling that field. That's going to be, I want you to use this prompt to help me improve this prompt, and I'm also giving you the PCFs. Whether you mention the PCFs or just include them, I don't think it matters as much. But what you want that tool to do should be guided by what you put in the system prompt. And if that is, I clearly just want you to give me the JSON right now, then that's what it'll do first. You can still have additional conversations and reorient it or redirect it. You can get it to do multiple things. You can say, now give me the JSON. OK, looks good. Now give me that documented. Or you could do it the other way around. Give me the node structure in the official format or the standard format. OK, looks good. Now give me the JSON. What you gave it as the user prompt at the beginning of the prompt plus contact I don't think matters anymore as long as it has clear output format rules about what it needs to give you, in the case of the Imaginator, what's on the workflow table that we care about. There are fields on the NADM workflow table that aren't relevant to the documentation. What is the URL for this workflow or the workflow ID or the slug seems to be a term N8n uses. That doesn't need to be in the prompt, it is on the table, but what are the four fields on the table that actually need to be in the prompt? The node, the type, the number, just so we know where it fits into the order, configuration specific to that node, which I don't think we've put enough detail into that part of the prompt. I don't know what is configurable about the different kinds of nodes. It would need to give us everything to configure the node, ideally.
+
+1:02:06 - Dwayne Gibson
+So we had a conversation about that with all of the different types of nodes each having their own configuration. It would be a massive table. I don't think it needs to be a table though.
+
+1:02:18 - Matthew Prisco
+I think it just needs to be. That's the difference.
+
+1:02:22 - Dwayne Gibson
+Yeah, we can capture it all the configurations in the JSON.
+
+1:02:25 - Matthew Prisco
+Right, right. So that's the difference of in the, in the node table, we still could capture the JSON specific to the node would be helpful. We have that, we have that field.
+
+1:02:37 - Unidentified Speaker
+We have the field, right.
+
+1:02:39 - Matthew Prisco
+So like I was saying to Alicia, or that Alicia should try to break out. And I think we can have the N8N Imaginator could either have another part that says, You may also be asked to parse existing JSON and associate it with the nodes. All we need to do is put that into the final documentation. I think we should. That you've got our current JSON, give us the parts of that that relate to each node. For sure, I think it can do that. And if we're asked to it to draft a workflow giving us node-by-node JSON. I mean, I'm just trying to put myself in, you know, the N8n developer shoes. That would make my life a lot easier and make it easier for you to have follow-up conversation and say, well, specific to this node, it actually needs to do that and adjust the JSON accordingly. So, I think this is really sounding like, yes, we need to have all of the current JSON on the workflow level, so it's easy to insert as context, then we also should have what's associated node by node.
+
+1:04:04 - Elisha Abriham
+Felicia? I think we have this node configuration summary on the table on N18 node.
+
+1:04:13 - Matthew Prisco
+Yeah. So does that get, I assume that gets exported into, you can only download the JSON for the whole workflow. Can you think of a way to copy and paste or otherwise download that node configuration summary? For each node or for- For each node.
+
+1:04:35 - Elisha Abriham
+Just we can have, the first prompt was like that. It gives for each node, the configuration and the node type, the JSON of each node, then we have updated that prompt into, it has to give us the whole full JSON, then we have the configuration.
+
+1:04:54 - Matthew Prisco
+Right, well the prompt can do all of that, all of that stuff is going to be in the prompt as an option. What I'm saying is, how can we get the current configurations out of NADET?
+
+1:05:07 - Unidentified Speaker
+Oh, right, just...
+
+1:05:08 - Matthew Prisco
+Not just the the overall JSON. I think Afolabi may have the answer. He's raising his hand.
+
+1:05:15 - Afolabi Dave
+I think what you're just going to do, Alicia, is it might be a little bit stressful, but what you need to do is separate each node, not the activation, the trash bot in between the connection of two nodes. Separate each note, then copy the JSON of that note. Once you copy the JSON of that note, you will get the, what do you call it? The JSON summary, the configuration of that exact note. Do you understand me, Alicia?
+
+1:05:48 - Unidentified Speaker
+Yeah, I got you.
+
+1:05:49 - Afolabi Dave
+All right.
+
+1:05:50 - Afolabi Dave
+So, yeah. Sorry, Matthew. One more time. I don't know how successful you've been with copying the JSON and putting it into another workflow to get a, um, a workflow. I haven't done it.
+
+1:06:03 - Matthew Prisco
+I finally got to the point where I felt like I had to personally work on the prompt last night. So, and that's the reason for the meeting today is so that now we can start to see how do you like the results, uh, compared to doing it without this. Okay.
+
+1:06:20 - Afolabi Dave
+So, um, this is, I think it's, I've not really been checking initials, which I know they it's Elisha and I'm doing Spark. But anything, it's actually a way it writes its JSON that's kind of different from the way most JSONs are written. So what Elisha needs to do now, or what I'm advising him to do is, rather than just giving the LLM the prompt and telling it, give us this, what I came to figure out is, you can get the JSON of one of our workflows, paste it into, what do you call it? An LLM, then have a conversation with it. So it gives you those special, what do you call it? Differences between what the normal LLM will give you and what the chat, what chat GPT will give you. Then paste that part into every prompt. Okay, this is the structure of the way, what do you call it? Of the way any terms documentation. Documentation works, post it into the prompt, and once you do that, every workflow you copy from the anything imaginator would 100%, even 100%, 98% create a new.
+
+1:07:36 - Matthew Prisco
+If I'm understanding that, that would be something that we put in the, as a sample JSON associated with each node type. Yes. Right. So that would be in the prompt. Like we were saying, I think some of them that we're not using often, just don't worry about it. But for those key nodes, we should put sample JSON into the prompt, and we can decide, or you guys can advise, how many nodes are important enough that we need that. I don't think we need it for all of them, either because it's an infrequent node. We can give it. We can say, you know, it's not our standard documentation, but here's, here's how, uh, here's the JSON structure for this. I think the reality is based on, on some of the videos I'm watching is that. In particular, Claude code does really well with building an eight end that you can copy and paste. So I think it already has been trained fully on. Once you say an eight N it knows the JSON needs to be a certain way. Um, our prompt is designed to enhance the results that people are able to get even without it. So, um, I haven't used Claude code at all, but if somebody could try it with this and see is Claude code shareable. Um, I am curious to see if that is, um, something that people end up liking more than chat GPT, same thing with If DeepSeek is shareable, then it's an option. If it's not, then it's less of an option.
+
+1:09:27 - Unidentified Speaker
+Okay.
+
+1:09:27 - Dwayne Gibson
+I don't think, I'll check, but I think cloud code is a part of their pro and max plans.
+
+1:09:39 - Matthew Prisco
+And we've got options of having an account, which may may work better. If you're going to use cloud, Betafits has a cloud account that knows Betafits. We have a chat GPT account that knows Betafits and you just log in and you do that. So it would be a question of which ones do we want to have Betafits accounts that have Betafits context in addition to using still the same process so that you guys get the experience like I do when I use my chat GPT and it already all of our terminology and, you know, this may be helpful for the quoting engine and the transformation engine. I don't even bring it up. So, I think that should be on Dwayne's side to be considering for how we can make our LLMs of choice smarter for individual team members that wouldn't get that benefit on their local versions?
+
+1:10:44 - Dwayne Gibson
+Uh, well, I've shared, I've shared a custom GPT that learns. It's just the, the quick, easy answer is everybody uses a beta fits custom GPT and it slowly learns. What would that look like,
+
+1:11:04 - Matthew Prisco
+So for, if you were to say, Hey, we've got this custom GPT, don't use, copy and paste it into your local LLM, copy and paste it into that. How would, how would everybody else on the call use that?
+
+1:11:21 - Dwayne Gibson
+When you share a custom GPT, it is just like, if you go to your chat GPT right now, you can select what model or GPT to use. When someone shares a custom GPT with you, you now have access to that as well.
+
+1:11:37 - Matthew Prisco
+Well, then, and that's only on chat GPT. Yes. So it sounds like that custom GPT as it is, would be better than the results. And you guys should test this. If you put this in your chat GPT, how good does it do? If Dwayne shares this with everyone and you put it in that, how well does it do? I assume it will do better, if not significantly better.
+
+1:12:03 - Dwayne Gibson
+There's a catch though. Every model is not built the same and it is a much bigger And I think most people realize and the custom GPT's use the rock-bottom cheap model I said they just don't reason as well.
+
+1:12:19 - Matthew Prisco
+So while it is learning giving better context, but less horsepower Yes, okay. So then it's it's not either or it becomes having both options and Trying it and seeing which ones people like but I think if that's shareable and most people are using chat GPT and we don't have an easy way. I would think with CLAWD code, if that's on the premium plan, it's can we make a case that BetaFit should have one and that our team can log on and use that. If it's, you know, N8n does better with CLAWD, log on and do it there. If that's going to work better than ChatGPT or custom GPT.
+
+1:13:06 - Dwayne Gibson
+I think that is a guaranteed yes, that cloud code, like you said, it is one of the premier model and frameworks right now. But that's also why I believe it's like $100 a month for the entry tier for cloud code. And everyone is raving over the $200 a month model. So I haven't even begun to daydream about it. But we can also reset the custom GPT. So it can we can load it up with only the latest instructions for the MCP engine, right? I don't want to say we can load it up with all of their cable.
+
+1:13:47 - Matthew Prisco
+And then it almost makes the MCP engine almost irrelevant.
+
+1:13:50 - Dwayne Gibson
+If it has that stuff, there's limits on how much we can give it like 20 documents. And I say, yeah, there's limits on how much Yeah.
+
+1:14:01 - Matthew Prisco
+Well, what are the most important, you know, tables, obviously the PCF table would be a given to put in there. Maybe the data dictionary, if we can count that one CSV with the whole data dictionary, that'd be pretty helpful.
+
+1:14:15 - Dwayne Gibson
+If it, we might be able to sneak in an XLS with the entire air table in it, like treat that as one file, but I can test that. I'll test that.
+
+1:14:25 - Matthew Prisco
+And this is now getting into the level of like air table assistant. And what can you do natively inside of Airtable that we haven't necessarily tried, but that could give us some answers to these data strategy questions? Okay. Well, I think this was long enough. I didn't want to drag it out this long, but I think there was a lot of value here. Hadi, if you can process the meeting and share that back. Wayne and he can get it to everybody else. Um, and then I think everybody has their own next steps. And if there's any questions, let's chat about that on Slack.
+
+1:15:16 - Hadi Ur Rehman
+Sounds good.
+
+1:15:18 - Afolabi Dave
+All right, guys.
+
+1:15:20 - Unidentified Speaker
+Thank you. Okay.

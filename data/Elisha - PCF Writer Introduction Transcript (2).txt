@@ -1,0 +1,168 @@
+Elisha - PCF Writer Introduction 
+Mon, May 12, 2025
+
+0:01 - Matthew Prisco going to show us sort of what we've got in the master project space. And the most important table for this is the PCF table, which is where we're listing all of our key project planning, like the breakout of what is a project is our highest level. And then every project has components, and then the components can have features. Sort of the overall project structure that we started with just when we were mapping what have we already built, and then to try to have a more repeatable way to do the same kind of documentation for each PCF, each project component or feature. You have a question there Alicia?
+
+1:03 - Unidentified Speaker No, no question.
+
+1:05 - Matthew Prisco It was by accident.
+
+1:07 - Matthew Prisco Okay. All right. Yeah. I saw the raise hand. No problem then. So yeah, every record that we've created on this PCF table is either a project component or feature. And then we're trying to figure out if we plan for each project, what are the components and features, then we want to have a way to document the same fields for each of those. And that the first thing I did here was I added the read AI to record the meeting. We then take the transcript from each meeting and we put it in Airtable. We can also put that in SuperBase to make it more RAG But that's a part of the processes that we're trying to design would be before we assign a project, we're sort of discussing it internally saying, yes, this is going to be our next feature on this project. It's a part of this component. Then we would have a meeting like this. And this could end up being PCF writer would be the content that we're discussing here so that the PROM and the N8N workflow for PCF Writer itself, we can think of PCF Writer as a feature.
+
+2:43 - Matthew Prisco We've already got PCF Writer actually doing.
+
+2:48 - Unidentified Speaker Can you show that in the PCFs?
+
+2:52 - Unidentified Speaker Yep.
+
+2:52 - Matthew Prisco What level did we component or feature? Feature, I guess, right?
+
+3:00 - Dwayne Gibson We assigned it a project.
+
+3:02 - Matthew Prisco Okay, well, I don't think it's a project.
+
+3:06 - Dwayne Gibson You want to reclassify it?
+
+3:08 - Matthew Prisco Yeah, which is part of the process, Alicia, is like we're saying, okay, this is a thing. Writer is going to be something that we're repeating, but it's really a part of project management, Duane, would be the, I don't even know what we want to call that, but what are all of the, from the tech side, automations or parts of our project management system? So, we've got then, because it is an AI type workflow, it would be what is the that we want to use to have whatever LLM we hook up to N8N to be able to take the prompt plus the meeting and any other resources that are specific to that PCF inside of that prompt, give it what are the fields that we have on this PCF table, what is the objective of this and to give it constraints. For example, like I was talking with Dwayne last week, we need to have it give a one-sentence summary so that we could explain in very succinct terms, what does this PCF do? Obviously, we need a longer summary too, one that's like a paragraph to describe what does it do. But I think it's also important to have a one sentence version of what it does. To have what are the tools that we're using. So, for this PCF, we're going to be using Airtable plus N8N plus a form from fill out. So, whatever the case may be for that PCF, that either the PCF writer puts those in based on the discussion that we've had, what are the tools So that would be a piece of the prompt, a piece of the N8N to prepare the PCF. So we may start it just with the bare bones, give it a name, assign it PC or F, link it to the other related project, for example. And then we need to think about as a workflow or as an internal process, How can we best create the PCF documentation or update it after we've had that launch meeting or revise it even later on? We've created a PCF, now we want to revise it. How could we have it do that as some kind of a scalable workflow? The tools and then the next one would be what is a basic approach to how we're going to build this? What are the steps? I think it's the same thing. We need to give it general constraints. One paragraph of bullet points or no more than one page or whatever we want to tell inside the prompt so that we can assign this to whoever is going to be project managing and whoever's building so that based on me and whoever else is needed to describe the project, to have this type of a meeting and then have it come away from that to create at least a good approach, even if we refine it along the way, to get the basic documentation of what we're going to try to do, to solve that or to create that for that project, for that record. Any questions so far? No, no, any questions.
+
+7:16 - Unidentified Speaker Okay.
+
+7:17 - Matthew Prisco Did that all kind of make sense with how we got to this point?
+
+7:24 - Matthew Prisco This has evolved over time and we sort of have settled on the you know, project component feature. I'm interested to see how do other companies do this, probably in JIRA, and they make a confluence document. So we're, you know, there are other freelancers that we're working on with different parts of this. For example, to have a project manager give feedback about what fields they would want to see on the PCF table. And then also, what would a product document look like, Something in a Google Doc that is more detailed. So, using that same meeting, but maybe then also using other resources. For example, if we have a, we're doing mapping. It depends on the PCF, it depends on the project. But for many of them, it's, we need to take data from this API and bring it into Airtable. Or we need to take data from Airtable and move it into Google Sheets. It's a lot of what are the fields and how do you get to those fields? What are the table and the base ID for Airtable, the table ID? And the field ID where we're creating these mapping tables so that we could copy and paste the mappings and the field IDs, the table IDs, I believe, into a code drafter that has the PCF and has the mappings. Now we can try to get code. Or if we give it some similar code that we already have as a base for generating the code. Now we start thinking about what are the other similar flows that we will create. One, create a PCF writer. Two, create a code sample drafter, which would itself be a part of the PCF. If it is a web scraper that we're trying to create, we can create some sample code as a part of the project management planning. We use Softr, which is a no-code front-end platform, connects really well with Airtable. We've developed a way to document the configurations for pages and blocks that are on our Softr portals. I think that we In the planning process, if it has to do with the softer portals, we could have the format that we've come up with for the softer pages and the softer blocks. We could ask our automation to draft the documentation for the softer blocks so that we can share it with the person who's going to build it in softer. Really think about how do we document the main stuff as a PCF. Potentially have a larger document that is more like a confluence or other JIRA project management standard, more detailed. And then to experiment also with drafting these softer blocks and drafting code in a way that we when we assign the project to the project manager and to whoever is doing the building. I wanted to put all of those pieces together even though really each of those is a different feature. Writer would be one, the software block would be another one, and the code sample writer would be even another one. I think there's a lot of widgets or workflows that we could use in the project base in general and with the project portal that we're building so that when we assign the project, all of the linked meetings are in that project portal. All of the PCF info, if there is a code drafted or any of these other documents, those would all be linked to, so we've got some help with building those portal or building that portal, starting to use it with our freelancers. Dwayne, obviously, Alicia would be a good candidate for putting his projects, his PCFs on his portal. So now we're already talking about what are those PCFs would be PCF Writer, Softer, Block Grafter, Code Sample Generator. And each of those would be assigned to to him as part of whatever, I think we need to make a master projects project. I think we have one. And then since I think we already had talked about the Slack summarizer, and I think Alicia has experience with Slack automations and things like that. That's something that I think Dwayne maybe spent a few hours last weekend working on has a proof of concept. We want freelancers to be able to update their status in our project space, in the master project space, based on a hashtag in Slack. Hashtag sign in. At the end of their work session, hashtag sign out. At this point, we're not trying to link that to Airtable, sorry, to Upwork, you still need to start your, you know, the official time tracking is still going through Upwork. But if we have signing in, signing out, we can update records as needed in Softr, sorry, through Softr and in, through Slack or Softr and in Airtable so that you can see it in the Softr. But then when we get to the end of the day, I think we can work on the prompt that we would use to store the daily summary from that person and share it with their manager or whoever else is involved with that project. So there's still some stuff to shape with that, but we now have, I think, the proof of concept on Slack for the summarize. And certainly have the intention that we generate a daily summary for each of the freelancers that are primarily working on just one or two projects.
+
+14:54 - Unidentified Speaker Okay.
+
+14:55 - Elisha Abriham So, so the whole, can you give me this big picture of this project, like from the starting to the end, in short, like, Yeah.
+
+15:08 - Matthew Prisco So we have in our N8n, we have used three workflows. N8n is weird with pricing and basically they make it feel like if we put them all on the same workflow and it has a starting point, if we want to do the Slack summarizer, here is Here is the webhook that would allow us to trigger that from Softr or from Airtable or based on when certain data and conditions are met, trigger Slack summarizer or schedule Slack summarizer. That can be in the same workflow and probably needs to be in the same workflow as all of these other automations. The PDF writer, the code generator, et cetera. We need to start mapping out each of these or at least starting with whichever one, but the vision would be all of these project management automations are going to get built out on a single node or a single workflow in N8n. Pick which one to work on first, develop the system so that we can go back through all of our PCFs and get the ones that we're working on documented so that the people working on those projects can benefit from that. So it's kind of trying to do what I wish we would have been doing a long time ago, because we have completed many projects, we've created PCFs for them, And we have very little documentation. So I would think that if we come up with a good PCF writer automation that Dwayne or somebody else who's working directly with the project management can go and write some additional notes, which I think needs to be a part of the PCF writer is take the meeting context, take any other link data or context, but then also take the additional instructions from whoever's using the PCF writer, it needs to include this, we're going to do this, whatever, and then incorporate that into the output. So, it can have the general context. I think we discussed in different ways that this should the expectation that the meeting is going to do everything, but if the person who's going to use the PCF writer also puts whatever information they want to make sure gets included in the PCF, then we just need the prompt to be able to make sense of the different sources for having AI generate a good enough version of the the overall PCF.
+
+18:17 - Dwayne Gibson Elisha, so from your video that Matthew shared, I saw that you were using VO and it has its niche is building AI applications. What do you think of in terms of what Matthew just described? If initially the prompt is given the meeting, it gives it to the LLM, it gives the user a summary of its current understanding And at that point, the user can adjust with additional information to bring it in line with the user understanding. And then it gets pushed to Airtable. And Matthew, what do you think about that as well?
+
+19:00 - Matthew Prisco I think it will come into that like that part of having the user review the key information about the PCF in general. So, that may be like a prep step, maybe a different workflow of then it is going to use that text with the full meeting again to generate the approach and the steps. But what would be like the condensed version? Like I was saying, what would you put in manually for that PCF to give that to you in a way that you can edit it and then it sends it as if had written that out instead of let AI do it. I don't think that would need VO.
+
+19:49 - Unidentified Speaker Yes, yes.
+
+19:50 - Matthew Prisco Or V0, whatever it is. That would just be another, that would be like TCF writer step one is to create the summary that's gonna then be used with the full writer. Because rather than giving what is the objective, what is whatever, I think it could give a good summary of what are the, or it could even draft those, but to give it back to you in a way that we're gonna again send it everything. Okay.
+
+20:32 - Elisha Abriham Dwayne, can you make sure that that's clear to you?
+
+20:38 - Matthew Prisco That is clear to me.
+
+20:41 - Dwayne Gibson And I was not, this was platform agnostic pitch that I was doing, pitching it back to it. So I think we're describing the same thing, just level of detail that we are because whatever what I was describing is meeting user refined PCF as the workflow. And it sounds like you're describing the same thing except what amount is it giving the first time on its first summary.
+
+21:14 - Matthew Prisco And how is it giving that back to you? So this could be where with a lot of these, would we be using it through the project portal and having that of the PCF fields? Would we want that to show up just as text? As it's not putting it into Airtable, it's giving you a draft of the objective, it's giving you a draft of whatever, and then you can edit it, and then it will send that into the writer, which would then maybe bring it back again for further editing, and then it could be a loop where you tell it that it looks good or I'm not sure but I think this would fit into the category of like human in the loop kind of automation where we want to get a draft of something and then work on it using the that we've built in some capacity. Well, let's talk maybe about what would be the N8N nodes that we would need here.
+
+22:42 - Elisha Abriham We have, as you have said, so if we are agreed with no human intervention, like revising that thing, and editing, and then go to the year table, we can use, like, first ask any freelancer or any user that needs a command from the Slack and we can, or if it's a Google, if it's a meeting, so we can use that data and to, so if, how does it, this region, this North Acre works, can you give me a bit of explanation on that?
+
+23:36 - Matthew Prisco Yeah, no, let me, I guess, I'll try it from my end. So, what it would need to do is to look first, we would select which PCF record we're running it for. So, in this case, we're going to select PCF writer. So, it's going to need to take the, I guess, whatever data we already have there, it might as well take that and feed it to the prompt. So, we need to have what is the prompt itself, which we already have some prompts, so we need to create LLM step with putting that in there. Then we need to take what is the other data in Airtable to merge it in with that prompt. So to take, I guess, the current data, why not? And then the meeting transcripts. So we need to make sure that we have a good way to take any of the meetings that have been tagged to that PCF to take the transcript from each of those meetings and put it also into the context window. So a lot of this at this stage is really thinking about that context window. The prompt itself is going in the context window. The current PCF, we might as well put that in the context window. The meetings, multiple meetings. So we're going to try not to have too many meetings to a PCF, but for sure we would want to have the transcripts from those meetings are also being put into context window. So I think that's really the first step of the proof of concept is, you know, Dwayne to share what is the prompt that we've been using for PCF Writer or any examples of output from it. But the first step is really to add it as a node or add it as a branch in this workflow or Canvas, add the main prompt, and then think about how do we add the meeting transcript and the current PCF fields to just put it in the context window. I think that's the first step.
+
+25:59 - Elisha Abriham We can fetch this thing from the Airtable, and we can use that as a knowledge base if we have this AI agent. So we will fetch this data from this Airtable, and we can use as a knowledge base, and we can integrate on the existing or as a self-load. Right.
+
+26:31 - Matthew Prisco So just as an example, right now we're taking specific meetings and we want to put the whole transcript from each of those meetings. We could have another data source that's just putting things in the context window where it can go to our rack. So when we get to the point where all of that knowledge, it could be other meetings, other company documents, context, where it can also check the RAG database and pull in the best context it can also from there. These are now multiple sources where we're just giving it the best context that we can, and then we will be working with project managers to really refine what are the fields that we want to have. And then we would refine how do we instruct the prompt to give us the best output in each of those fields?
+
+27:32 - Unidentified Speaker Yeah.
+
+27:32 - Matthew Prisco But I think just to have a simple first step, at least in terms of, you know, getting everybody working well together, I think being able to bring in the meeting, use whatever prompt we have and be able to bring in the fields from that PCF record and the meeting transcripts from the meetings table. That would be, I think, the first sort of milestone to target and probably isn't that hard or won't take that long. And then we can, you know, think about what testing or, you know, you know, how Dwayne can share what we've tried so far, maybe what the shortcomings are with the current process. I don't necessarily know all of those because I haven't tested it myself. Yes, the current process is completely manual. I would go to- And that's the part that I'm trying to help bring in is I think you're having to paste context from all different sources. Let's work on how do we add all of the sources. So as an example, we would need to be able to get code from other automation. So if there's a linked automation, and that is Python code, we would then put the Python code into the context window. Or if it's something where there's a field mapping that we've done, it would need to be able to paste the whole field mapping table including the base IDs and field IDs and all of that into the context window as well. That, to me, would be more for the product document or for the sample code as opposed to maybe the PCF writer. But if it wouldn't hurt the PCF writer, then, you know, why not add that to the context window too? So, Dwayne, is that what you mean by it's very manual?
+
+29:46 - Dwayne Gibson Yeah, I would copy the AI prompt here, download the transcript, give it the transcript, and then give it a guide rails, because the transcript usually contains more than one topic. So, I'd give it guide rails to narrow it in.
+
+30:02 - Matthew Prisco And if you want to use that term guide rails, that would be that first step like we're talking about is process everything we gave you and give us the, give us the guardrails or give us the draft based on this so that we can refine it or give it whatever you would have needed to write as guardrails.
+
+30:28 - Dwayne Gibson So my guardrails are, there may be multiple topics discussed. You are creating a PCF for X.
+
+30:36 - Matthew Prisco Yeah. Why not? Put that in in the prompt itself? You're saying because it may or may not have multiple topics?
+
+30:46 - Unidentified Speaker Yes. Yes.
+
+30:46 - Matthew Prisco Um, I mean, we could even have a a part of the workflow where we give it all of the context and then have it do a draft of the context window and say eliminate the relevant context. Before we have it write the PCF, say only keep the meeting, you know, topics that are on topic or something like that is a possibility. Yeah, it just it just needs a topic.
+
+31:19 - Dwayne Gibson It needs the PCF topic is the thing. Yeah, correct.
+
+31:24 - Matthew Prisco But is it better for it to draft what is the overall what should be on the PCF before we tell it to go back and eliminate the irrelevant context. I think it'll take testing, but I think you're thinking about it the way I am.
+
+31:49 - Dwayne Gibson Do you want me to set Elisha up with a portal access so he can I can share the credentials to and Airtable within.
+
+32:02 - Matthew Prisco Yes. So that's another big part of it. Like right here, we now need to give Airtable login and API key for whatever LLMs we're going to use or giving the N8N. So the idea is that Dwayne can assign that or whoever is managing the Can assign those from air table so that when you log into your portal you would see the PCFs that we've discussed The credentials that you need so definitely let's let's as a follow-up to this it'll probably take Dwayne You know 15 minutes maybe to prepare the portal and then he'll share the the login for the the freelancer portal that'll have PCF rights as a PCF, and then we'll work on, you know, getting the, taking the first steps in N8N.
+
+33:05 - Elisha Abriham Okay.
+
+33:06 - Matthew Prisco So, I think that covers it. And Dwayne, you don't have too much on your plate right now, you know, for the rest of today.
+
+33:21 - Dwayne Gibson I can get this knocked out real quick.
+
+33:25 - Matthew Prisco All right. Yeah, be good. Alicia, how much time do you think you have left today to just try to wrap around the project and ask any questions?
+
+33:39 - Unidentified Speaker Yes, yes.
+
+33:40 - Elisha Abriham I'm having a network problem. I couldn't hear you.
+
+33:44 - Matthew Prisco I was saying, how much time do you have today to work on the next steps?
+
+33:52 - Elisha Abriham I'm gonna spend about four hours for today, it's nice.
+
+33:56 - Matthew Prisco Okay, so then that gives you, you know, there's no pressure on, you know, needing to get to a certain point, just as you have questions, just try to be very, you know, communicate as much as you can on Slack, because that's gonna be, like I mentioned, summarizer, it's only going to know what went on Slack. So just be thinking about how, you know, how we can develop sort of the standards of communication since we're also the ones working on the automation. You know that the summary is only going to be able to use what's on Slack. So if you're saying, okay, here's my plan. I'm going to work on this. And just anything that is worth sharing, think about it also what's useful for the summary. Okay. So when you encounter a challenge, for example, either a challenge or a solution, when there's a challenge, you should put what the challenge is so that Dwayne, we may already know the answer. So we're trying to sort of like, just in our experience in the past with freelancers is sometimes people they'll go off and try to fix a problem. They say, Oh, I'm debugging this, I'm working on this. And they didn't fully understand what was needed. And they never told us what the problem was they were trying to solve, what their intended solution was. And then they work through it and come up with a solution to a problem that they didn't understand. So we're trying to, you know, figure out from the communication side, if there's a solution, sorry, if there's a challenge, communicate it. If there's a potential solution, communicate it so that those for sure would be included on the daily summaries, but also so that the rest of that team can also add feedback along the way.
+
+35:57 - Dwayne Gibson Elisha, I think you probably have covered this in your meeting with Matthew, but can you fill me in on your normal working hours what times you'll usually be available. You said you'll be working for four more hours a day. Matthew, this is the tool I found that is pretty good as a default, but I found something a little bit better. So, will it usually be from around 8 to 12, 8 to 11, for you around this time?
+
+36:35 - Elisha Abriham I think I think I'm I'm usually like, I think he said he works only usually for.
+
+36:48 - Unidentified Speaker Yeah, I guess.
+
+36:51 - Matthew Prisco I mean, the way the way you'll see it in the the project base is typical start time and typical end time. Because some people, they have very narrow time when they're available. Maybe they have a full-time job and they want to do two hours a day, but it sort of needs to be around the same time. So that may not be exactly the situation here. But again, we're trying to build processes so that it can be more clear to, you know, the manager What are the hours that that person generally would be working? And then about how many hours a week are we targeting? Is it five hours a week, 10 hours a week? So that I think for all of us, we don't have any specific expectations around what your schedule, which day you work or not, but from project management, which is really what this whole base is for, we would need to be able to assign two different freelancers, here's what you can do next week because we know that you're a 10 hour a week freelancer. So we can do agile planning, sprint planning. So we're sort of at the very early stages of testing this in terms of typical start time, typical end time, target hours as a general rule. And then I think even we would ask people for their target hours for the week if they're, if it's going to be different than their normal target hours. So do you have any background or experience with kind of agile planning and how teams do that? We're learning, but I only know the concept. Done it before?
+
+38:51 - Elisha Abriham Most of the time what we do is like we're gonna the spring plan for the week and then we will define the time then from the team who will gonna spend this amount of time at what day and we're gonna also the update based on the task allocation. Am I audible? Yes, I can hear you.
+
+39:23 - Matthew Prisco It's a little bit choppy. But yes, so then the fact that you know that now you can see what we're trying to figure out is if you don't have a full time team, where you know exactly, I think the agile scrum leader or whoever's doing the planning, if they if every one is full time, they can just plan their work. But we're trying to figure out how can we make it flexible enough, but what consistency do we need? What data do we need? Target hours seems important. And to have that expectation of, yes, this person, these are their skills. This is the project that they're working on. They typically do 10 hours a week. And if that's going to be, hey, I have more time next week. I want to work 20 hours." Communicate that at the end of the last week or the beginning of the next week. As we work towards having not just a way to manage each project, but a way to sprint, plan, and all of that. At this point, that's just the reason Dwayne's asking, what are your typical available hours? Target of how many hours per week, mostly just to put it in the database, not that we're fully planning with it at this point.
+
+40:56 - Elisha Abriham I got you. I think for today, I'm going to spend on the week. I enjoy most of the time working late, so it can be in my time, night, but from, uh, in Easter in, uh, do you have the experience in Eastern time? Yeah.
+
+41:18 - Matthew Prisco So I'm in Eastern time right now. Dwayne is in central time. I think Dwayne, realistically, we're going to have to, I think, standardize around Eastern time for Eastern time at the top.
+
+41:31 - Dwayne Gibson I got you.
+
+41:32 - Matthew Prisco So, yeah, I mean, like I was saying, it seems like it's more of an afternoon schedule for us, we have some people who are very front loaded in the beginning and that we, you know, that's what gets my attention when I start the day is the customer success team that's mostly working early. And, you know, I think it's more for Dwayne to know, okay, if he needs to plan his day, he's going to be available, you know, to work with you during the three hours or so that you typically are working. And then, you know, kind of go, go from there. So what, what time is, what time zone is, uh, Ethiopia? No, I see Addis Ababa. So that's 8 PM is for us is one. So that's around now. So it's 8 PM.
+
+42:36 - Unidentified Speaker Yeah.
+
+42:36 - Matthew Prisco So are you saying even, even a little bit later would be better and more normal than maybe two hours later?
+
+42:48 - Elisha Abriham Yeah. Like I'm on the day part also, if that's okay. Yeah.
+
+42:55 - Matthew Prisco You and doing can, can figure out whatever.
+
+42:59 - Dwayne Gibson Yeah. So whenever you're, I'm, I'm adjusting, like Matthew was saying, I'm adjusting my time to you. So we definitely can figure out a time that works. And another consideration is that I like to schedule messages. So if there's an update that you're waiting on from me, you know, I don't know what else you have going on in your personal and work life, but I don't want to distract you with, you know, something that's not relevant at the moment. So I can schedule my messages to you updates around the time that you start working. So it's fresh in your mind.
+
+43:43 - Elisha Abriham It's fresh in my mind and we can address it. OK. OK. Let's make it on 9 p.m. And up to. Too late.
+
+43:58 - Matthew Prisco So it's really more about the typical start time and the typical end time is less important. Just whenever, whatever's needed for the day.
+
+44:11 - Dwayne Gibson So Matthew, on the, okay, so you want to change this to Eastern, Matthew?
+
+44:20 - Matthew Prisco Yep, let's do that. Just take out the S. That's a pet peeve because it's not always standard time. There's eastern daylight time and standard time, but it's based on whether there's daylight savings time. Gotcha. Which also makes the whole, what time is it anywhere else? If we have daylight savings time, and they did, and it's not as simple as just adding 12 hours, it might be 11 or 12 hours. I'm pretty sure this tool calculates for that.
+
+45:08 - Dwayne Gibson I'm sure it does, yeah.
+
+45:09 - Matthew Prisco I'm just saying what are some of the other pain points with time conversion is it's not always the same.
+
+45:17 - Dwayne Gibson I found a so I copied this tool to make a beta fist version of it And it's mostly there and it has to I see what you're doing. Okay, I got you but I found this video of a programmer talking about one of the hardest things to program and he zeroed in on a time zone clock because you have nations that within a week decide to Undo daylight saving time. They lost a minute added a minute. They want to do here It's incredibly complicated to my point. Yeah.
+
+45:49 - Matthew Prisco No, I mean, I would think if we needed a table to manage this, we'd have all the time zones that we're working in and we could just always have it as what are they relative to, you know, the prime meridian or whatever the Greenwich standard time is.
+
+46:08 - Unidentified Speaker Okay.
+
+46:08 - Dwayne Gibson So we got the, like Matthew was saying, the key. Is the start time so what is not 9pm that's his local time or or are you trying to put start local time now I think just put start in eastern that's what I did oh no no in eastern you're right you're right you're right so that would be what two two o'clock yeah Okay.
+
+46:40 - Matthew Prisco Sounds good. All right. Let's try to end the meeting here then just so we don't let the recording get too bloated. And then Dwayne will share the login, the portal credentials and inside of there once the meeting has been processed by read AI, you'll also have the link to the meeting.
+
+47:14 - Unidentified Speaker Okay.
+
+47:14 - Unidentified Speaker Okay.
+
+47:15 - Unidentified Speaker All right.
+
+47:15 - Matthew Prisco I'm going to end it there and then we'll go back to Slack. I got to add Dwayne actually to Alicia's channel. Okay. Sounds good. All right. Thanks guys.
+
+47:29 - Unidentified Speaker Bye.
+
+47:30 - Dwayne Gibson Nice to meet you, Alicia. Thank you.

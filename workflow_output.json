@@ -1,0 +1,455 @@
+{
+  "message": "review ROI repository",
+  "next_node": "code_reviewer",
+  "code_generator_output": {
+    "selected_repository_ids": [
+      "rec6dg1rCKtpJKNof"
+    ],
+    "review": {
+      "repositories": [
+        {
+          "repo_id": "rec6dg1rCKtpJKNof",
+          "name": "ROI",
+          "overall_grade": "F",
+          "summary": "This repository is a collection of Google Apps Scripts, lacking a clear structure and separation of concerns, and does not adhere to the Betafits Engineering Standard. The code contains hardcoded credentials and lacks dependency management, making it a high-risk and unmaintainable codebase.",
+          "suggestions": [
+            "Refactor the repository to adhere to the Betafits Engineering Standard, separating logic from orchestration.",
+            "Implement proper security practices by abstracting credentials and sensitive information into configuration files.",
+            "Add documentation and unit tests to improve maintainability and testability."
+          ],
+          "libraries_used": [],
+          "security_flags": [
+            "Exposed API keys and secrets in source code (e.g., ChatGPT_API.js)."
+          ],
+          "engineering_standard_compliance": {
+            "folder_structure": "non-compliant",
+            "separation_of_concerns": "non-compliant",
+            "naming_conventions": "partial",
+            "notes": "The repository lacks a defined structure and separation of concerns. Folder structure is flat and does not follow the Betafits standard. Naming conventions are inconsistent."
+          },
+          "grades": {
+            "repo_structure": "F",
+            "code_quality": "D",
+            "documentation": "D",
+            "security_practices": "F",
+            "modularity_testability": "F",
+            "dependency_management": "F",
+            "performance": "D",
+            "error_handling": "D",
+            "style_guide_compliance": "D"
+          },
+          "folders": [
+            {
+              "folder_id": "rec3Mmn5LWWfdSwpD",
+              "folder_path": "ROI: ",
+              "overall_grade": "D",
+              "summary": "This folder contains a mix of scripts without a clear purpose, violating the Engineering Standard's folder structure guidelines.",
+              "file_count": 8
+            },
+            {
+              "folder_id": "recOzPS3noqeTnXFH",
+              "folder_path": "2025",
+              "overall_grade": "D",
+              "summary": "This folder contains scripts related to the year 2025, but lacks a defined structure and separation of concerns, failing to comply with the Engineering Standard.",
+              "file_count": 34
+            },
+            {
+              "folder_id": "recjPIkA0Sk8Qk1Il",
+              "folder_path": "ROI: ",
+              "overall_grade": "D",
+              "summary": "This folder contains a collection of scripts without a clear organizational structure, violating the Engineering Standard's folder structure guidelines.",
+              "file_count": 14
+            },
+            {
+              "folder_id": "recucWEMMALWLxyOs",
+              "folder_path": "ROI/root",
+              "overall_grade": "F",
+              "summary": "This folder contains a clasp.json file, indicating a Google Apps Script project, but lacks proper structure and separation of concerns, failing to comply with the Engineering Standard.",
+              "file_count": 1
+            }
+          ],
+          "files": [
+            {
+              "file_id": "rec0qjjriUj66uzgK",
+              "file_path": "2025 > ExportKpiDataToAirtable.js",
+              "file_name": "ExportKpiDataToAirtable.js",
+              "language": "Apps Script",
+              "bugginess": "medium",
+              "room_for_improvement": "Abstract Airtable credentials into a configuration file and implement error handling for API calls.",
+              "lines_of_code": 83
+            },
+            {
+              "file_id": "rec2EF4YaTGuGNl1v",
+              "file_path": "Menu.js",
+              "file_name": "Menu.js",
+              "language": "Apps Script",
+              "bugginess": "low",
+              "room_for_improvement": "Consider using a more descriptive naming convention for menu items and functions.",
+              "lines_of_code": 12
+            },
+            {
+              "file_id": "rec3dva2QE5UpXnVl",
+              "file_path": "BenAdmin.js",
+              "file_name": "BenAdmin.js",
+              "language": "Apps Script",
+              "bugginess": "medium",
+              "room_for_improvement": "Add error handling for file processing and consider modularizing the code into smaller, reusable functions.",
+              "lines_of_code": 28
+            },
+            {
+              "file_id": "rec7JrQyzza4lIsuJ",
+              "file_path": "2025 > N8NToROI-RenewalsAndQuotes.js",
+              "file_name": "N8NToROI-RenewalsAndQuotes.js",
+              "language": "Apps Script",
+              "bugginess": "medium",
+              "room_for_improvement": "Improve code readability by adding comments and breaking down complex functions into smaller, more manageable units.",
+              "lines_of_code": 158
+            },
+            {
+              "file_id": "recAdSck5F86mNZ0h",
+              "file_path": "Finch_API.js",
+              "file_name": "Finch_API.js",
+              "language": "Apps Script",
+              "bugginess": "high",
+              "room_for_improvement": "Abstract API keys and sensitive information into a configuration file and implement robust error handling for API calls.",
+              "lines_of_code": 53
+            },
+            {
+              "file_id": "recAfySWmetYX5ANp",
+              "file_path": "2025 > Menus.js",
+              "file_name": "Menus.js",
+              "language": "Apps Script",
+              "bugginess": "low",
+              "room_for_improvement": "Consider using a more descriptive naming convention for menu items and functions.",
+              "lines_of_code": 43
+            },
+            {
+              "file_id": "recB3vtqkXyIjfUAm",
+              "file_path": "2025 > GenBenefitBudget.js",
+              "file_name": "GenBenefitBudget.js",
+              "language": "Apps Script",
+              "bugginess": "high",
+              "room_for_improvement": "Modularize the code into smaller, reusable functions and add error handling for data processing.",
+              "lines_of_code": 175
+            },
+            {
+              "file_id": "recBFzt77LJLn4scm",
+              "file_path": "formatSheetAndExportResult.js",
+              "file_name": "formatSheetAndExportResult.js",
+              "language": "Apps Script",
+              "bugginess": "medium",
+              "room_for_improvement": "Improve code readability by adding comments and breaking down complex functions into smaller, more manageable units.",
+              "lines_of_code": 374
+            },
+            {
+              "file_id": "recDvBRwym4hg3DQM",
+              "file_path": "2025 > ImportGroupDataFromFormsBaseTROIHelpers.js",
+              "file_name": "ImportGroupDataFromFormsBaseTROIHelpers.js",
+              "language": "Apps Script",
+              "bugginess": "low",
+              "room_for_improvement": "Consider using a more descriptive naming convention for variables and functions.",
+              "lines_of_code": 161
+            },
+            {
+              "file_id": "recEgbYxlCPLCJ4v7",
+              "file_path": "2025 > FormatSheetAndExportResult.js",
+              "file_name": "FormatSheetAndExportResult.js",
+              "language": "Apps Script",
+              "bugginess": "medium",
+              "room_for_improvement": "Improve code readability by adding comments and breaking down complex functions into smaller, more manageable units.",
+              "lines_of_code": 96
+            },
+            {
+              "file_id": "recG4IBfW3KV0venW",
+              "file_path": "2025 > MeasureExecutionTime.js",
+              "file_name": "MeasureExecutionTime.js",
+              "language": "Apps Script",
+              "bugginess": "low",
+              "room_for_improvement": "Consider using a more descriptive naming convention for variables and functions.",
+              "lines_of_code": 18
+            },
+            {
+              "file_id": "recGKIvBOXOcwedK2",
+              "file_path": "InputFiles.js",
+              "file_name": "InputFiles.js",
+              "language": "Apps Script",
+              "bugginess": "medium",
+              "room_for_improvement": "Add error handling for file processing and consider modularizing the code into smaller, reusable functions.",
+              "lines_of_code": 79
+            },
+            {
+              "file_id": "recGPxVztas5nRWVA",
+              "file_path": "AIAudit_DummyData.js",
+              "file_name": "AIAudit_DummyData.js",
+              "language": "Apps Script",
+              "bugginess": "low",
+              "room_for_improvement": "Consider storing the dummy data in a separate file or database.",
+              "lines_of_code": 20
+            },
+            {
+              "file_id": "recH4cFWenihSiadj",
+              "file_path": "2025 > TrackUserActions.js",
+              "file_name": "TrackUserActions.js",
+              "language": "Apps Script",
+              "bugginess": "medium",
+              "room_for_improvement": "Add error handling for spreadsheet operations and consider using a more robust logging mechanism.",
+              "lines_of_code": 35
+            },
+            {
+              "file_id": "recKc6T5YGMtzeqSJ",
+              "file_path": "2025 > HelperPlanMapping.js",
+              "file_name": "HelperPlanMapping.js",
+              "language": "Apps Script",
+              "bugginess": "low",
+              "room_for_improvement": "Consider using a more descriptive naming convention for variables and functions.",
+              "lines_of_code": 15
+            },
+            {
+              "file_id": "recKkC7g3RIxvQ6St",
+              "file_path": "Payroll_DummyData.js",
+              "file_name": "Payroll_DummyData.js",
+              "language": "Apps Script",
+              "bugginess": "low",
+              "room_for_improvement": "Consider storing the dummy data in a separate file or database.",
+              "lines_of_code": 3
+            },
+            {
+              "file_id": "recKr3iayusoihUOt",
+              "file_path": "Webhook.js",
+              "file_name": "Webhook.js",
+              "language": "Apps Script",
+              "bugginess": "medium",
+              "room_for_improvement": "Add input validation and error handling for webhook parameters.",
+              "lines_of_code": 83
+            },
+            {
+              "file_id": "recMYA6sUIpaZulJE",
+              "file_path": "2025 > HelperPlanData.js",
+              "file_name": "HelperPlanData.js",
+              "language": "Apps Script",
+              "bugginess": "medium",
+              "room_for_improvement": "Add error handling for spreadsheet operations and consider using a more robust caching mechanism.",
+              "lines_of_code": 117
+            },
+            {
+              "file_id": "recMYeOJ2XfR7ihpO",
+              "file_path": "2025 > ImportDataFromAirtable.js",
+              "file_name": "ImportDataFromAirtable.js",
+              "language": "Apps Script",
+              "bugginess": "medium",
+              "room_for_improvement": "Abstract Airtable credentials into a configuration file and implement error handling for API calls.",
+              "lines_of_code": 198
+            },
+            {
+              "file_id": "recPFobiSwUtxMSp1",
+              "file_path": "2025 > GenerateComparisonFromPlanData.js",
+              "file_name": "GenerateComparisonFromPlanData.js",
+              "language": "Apps Script",
+              "bugginess": "medium",
+              "room_for_improvement": "Improve code readability by adding comments and breaking down complex functions into smaller, more manageable units.",
+              "lines_of_code": 151
+            },
+            {
+              "file_id": "recPtYwBLchQ80Q0g",
+              "file_path": "2025 > ImportPlanDataFromFormsBase.js",
+              "file_name": "ImportPlanDataFromFormsBase.js",
+              "language": "Apps Script",
+              "bugginess": "medium",
+              "room_for_improvement": "Abstract Airtable credentials into a configuration file and implement error handling for API calls.",
+              "lines_of_code": 80
+            },
+            {
+              "file_id": "recQJeszLQ6kBmhxe",
+              "file_path": "Testing _AutoDropDownAdd.js",
+              "file_name": "Testing _AutoDropDownAdd.js",
+              "language": "Apps Script",
+              "bugginess": "medium",
+              "room_for_improvement": "Improve code readability by adding comments and breaking down complex formulas into smaller, more manageable units.",
+              "lines_of_code": 27
+            },
+            {
+              "file_id": "recQm2lYRzsmirEQB",
+              "file_path": "2025 > AirtableToROI WebhookHelpers.js",
+              "file_name": "AirtableToROI WebhookHelpers.js",
+              "language": "Apps Script",
+              "bugginess": "high",
+              "room_for_improvement": "Abstract Airtable credentials into a configuration file and implement robust error handling for API calls.",
+              "lines_of_code": 588
+            },
+            {
+              "file_id": "recS69uxC33SdiZdG",
+              "file_path": "upload.js",
+              "file_name": "upload.js",
+              "language": "Apps Script",
+              "bugginess": "high",
+              "room_for_improvement": "This file seems to be using Node.js syntax (require, process.env) within a Google Apps Script environment, which is incorrect. Rewrite using Google Apps Script's native methods (PropertiesService, UrlFetchApp).",
+              "lines_of_code": 74
+            },
+            {
+              "file_id": "recT1hmVHGqJ4Chwu",
+              "file_path": "2025 > SendSoldPlanDataToAirtable.js",
+              "file_name": "SendSoldPlanDataToAirtable.js",
+              "language": "Apps Script",
+              "bugginess": "high",
+              "room_for_improvement": "Abstract Airtable credentials into a configuration file, implement robust error handling for API calls, and modularize the code into smaller, reusable functions.",
+              "lines_of_code": 1238
+            },
+            {
+              "file_id": "recTxMIfSAn2ZiLyJ",
+              "file_path": "2025 > GetSingleSelectOptionsFromAirtable.js",
+              "file_name": "GetSingleSelectOptionsFromAirtable.js",
+              "language": "Apps Script",
+              "bugginess": "medium",
+              "room_for_improvement": "Abstract Airtable credentials into a configuration file and implement error handling for API calls.",
+              "lines_of_code": 65
+            },
+            {
+              "file_id": "recUGKVReunxzxYl5",
+              "file_path": "ChatGPT_API.js",
+              "file_name": "ChatGPT_API.js",
+              "language": "Apps Script",
+              "bugginess": "high",
+              "room_for_improvement": "Abstract the API key into a secure configuration and implement error handling for API calls.",
+              "lines_of_code": 31
+            },
+            {
+              "file_id": "recVG8Pa5rd9jsSOm",
+              "file_path": "upload.js",
+              "file_name": "upload.js",
+              "language": "Apps Script",
+              "bugginess": "high",
+              "room_for_improvement": "This file seems to be using Node.js syntax (require, process.env) within a Google Apps Script environment, which is incorrect. Rewrite using Google Apps Script's native methods (PropertiesService, UrlFetchApp).",
+              "lines_of_code": 74
+            },
+            {
+              "file_id": "recViB9DFswiCKpxC",
+              "file_path": "Plan-Data Custom-Functions.js",
+              "file_name": "Plan-Data Custom-Functions.js",
+              "language": "Apps Script",
+              "bugginess": "medium",
+              "room_for_improvement": "Improve code readability by adding comments and breaking down complex functions into smaller, more manageable units.",
+              "lines_of_code": 269
+            },
+            {
+              "file_id": "recW7dYqXXOnodRSX",
+              "file_path": "Customers.js",
+              "file_name": "Customers.js",
+              "language": "Apps Script",
+              "bugginess": "low",
+              "room_for_improvement": "Consider using a more descriptive naming convention for variables and functions.",
+              "lines_of_code": 31
+            },
+            {
+              "file_id": "recWEZyep0Za8BGyx",
+              "file_path": "2025 > GenEExEE.js",
+              "file_name": "GenEExEE.js",
+              "language": "Apps Script",
+              "bugginess": "high",
+              "room_for_improvement": "Modularize the code into smaller, reusable functions and add error handling for data processing.",
+              "lines_of_code": 207
+            },
+            {
+              "file_id": "recWJm9Laecdwx2gm",
+              "file_path": "Common.js",
+              "file_name": "Common.js",
+              "language": "Apps Script",
+              "bugginess": "high",
+              "room_for_improvement": "Avoid hardcoding IDs and sensitive information directly in the code. Use PropertiesService to store configuration values.",
+              "lines_of_code": 81
+            },
+            {
+              "file_id": "recWNexUhBi0UiWDc",
+              "file_path": "2025 > Calc_Data.js",
+              "file_name": "Calc_Data.js",
+              "language": "Apps Script",
+              "bugginess": "high",
+              "room_for_improvement": "Modularize the code into smaller, reusable functions and add error handling for data processing.",
+              "lines_of_code": 492
+            },
+            {
+              "file_id": "recXMHGvA93loHhC9",
+              "file_path": "2025 > NewSpreadsheetFileFromTemplate.js",
+              "file_name": "NewSpreadsheetFileFromTemplate.js",
+              "language": "Apps Script",
+              "bugginess": "medium",
+              "room_for_improvement": "Add error handling for spreadsheet operations and consider using a more robust logging mechanism.",
+              "lines_of_code": 105
+            },
+            {
+              "file_id": "recajUv7A9ArSaFaG",
+              "file_path": "ExportFormulas.js",
+              "file_name": "ExportFormulas.js",
+              "language": "Apps Script",
+              "bugginess": "medium",
+              "room_for_improvement": "Add error handling for spreadsheet operations and consider using a more robust logging mechanism.",
+              "lines_of_code": 68
+            },
+            {
+              "file_id": "reccKRezCvKdful8c",
+              "file_path": "Common.js",
+              "file_name": "Common.js",
+              "language": "Apps Script",
+              "bugginess": "low",
+              "room_for_improvement": "Consider using a more descriptive naming convention for variables and functions.",
+              "lines_of_code": 40
+            },
+            {
+              "file_id": "recceNFIGAzHSdHiT",
+              "file_path": "2025 > WritePackageToPlanDataSheet.js",
+              "file_name": "WritePackageToPlanDataSheet.js",
+              "language": "Apps Script",
+              "bugginess": "medium",
+              "room_for_improvement": "Improve code readability by adding comments and breaking down complex functions into smaller, more manageable units.",
+              "lines_of_code": 44
+            },
+            {
+              "file_id": "recdMaDsHcXlLMm4Z",
+              "file_path": "Invoice.js",
+              "file_name": "Invoice.js",
+              "language": "Apps Script",
+              "bugginess": "medium",
+              "room_for_improvement": "Add error handling for file processing and consider modularizing the code into smaller, reusable functions.",
+              "lines_of_code": 37
+            },
+            {
+              "file_id": "receR8t3yaXDDzB0m",
+              "file_path": "2025 > Common.js",
+              "file_name": "Common.js",
+              "language": "Apps Script",
+              "bugginess": "high",
+              "room_for_improvement": "Avoid hardcoding IDs and sensitive information directly in the code. Use PropertiesService to store configuration values.",
+              "lines_of_code": 164
+            },
+            {
+              "file_id": "recfANLdyoC7rgnPC",
+              "file_path": "2025 > helper_NamedRanges.js",
+              "file_name": "helper_NamedRanges.js",
+              "language": "Apps Script",
+              "bugginess": "medium",
+              "room_for_improvement": "Improve code readability by adding comments and breaking down complex functions into smaller, more manageable units.",
+              "lines_of_code": 207
+            }
+          ]
+        }
+      ]
+    },
+    "context_used": {
+      "repositories_count": 14,
+      "total_folders_count": 126,
+      "total_files_count": 425,
+      "standards_used": [
+        "BETAFITS_CODE_GRADING_RUBRIC.md",
+        "CODING_STYLE.md",
+        "ENGINEERING_STANDARD.md"
+      ],
+      "per_repository_filtered": {
+        "ROI": {
+          "folders_count": 4,
+          "files_count": 57
+        }
+      },
+      "airtable_updates": {}
+    }
+  },
+  "error": null
+}

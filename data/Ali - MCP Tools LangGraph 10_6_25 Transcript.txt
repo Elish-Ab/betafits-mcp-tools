@@ -1,0 +1,95 @@
+Ali - MCP Tools LangGraph 10/6/25
+Mon, Oct 6, 2025
+
+0:00 - Ali Tallat
+The MCP tools table that you have created on the air table. Is this the right one?
+
+0:05 - Matthew Prisco
+Yes, yeah It's related, but I would say it's not primary. So let me just give an overview Part of the reason is just to get a lot At first which is that you want me to refine this MCP tools table No, it really doesn't involve the MCP tools table I wish I would have deleted that. It's just going to mislead. We're dealing with those tools, but when I say tool at this point, really it's an output format plus a prompt. So each of them are functioning the same way. What's more important, I'll just kind of recap the parts of the ecosystem here. So we've got the N8n workflows that I shared. One of them is MCN. Engine, the other is MCP tools. So one way to think of your central part of the workflow is how do we make the MCP engine and the MCP tools in a Langrath version instead of an N8n version. So that's kind of, you know, maybe the main synopsis of the project. That's why I shared the JSON for those workflows and that's going to be really important. So what is difference between those two workflows. Engine is for gathering context and again in N8n it's a very linear process and without an LLM to guide it, it really was a form that the user can select the context that they want so that it can be gathered from Airtable. So if we want the documentation from one of the data dictionary, so the data catalog is the table listing, and if you select that data catalog record, the workflow was built to give the data dictionary records for that table. So that's one type it can gather. It could gather the documentation for an N8N workflow. That means go to the workflow table and then get the linked nodes and the link prompt. If it were softer, let me just, this is mostly for the recording. I know you're understanding it. The idea is that we can get the transcript on this and you can plug it in. Softer would be softer portals, softer pages, and softer blocks. So that's a no code front end. So everything that we're building, we're documenting. And if the person who's guiding that MCP tool run, which is what we were calling if you run the MCP tool automation from the form, that it will gather all of the types of context that you wanted, including the prompt for that tool. So if you selected N8N Imaginator, first it would give you the prompt for that tool, and then all of the rest of the context that you requested on the form, and it would paste, or it would write all of that into a field in the master projects base, but basically onto a field that you could then copy it and put it into your own LLM. So basically it was just trying to have a scalable process or at least a repeatable process to put together context packages. Obviously that would work a lot better if the central context engine is determining what context is relevant, and then selecting it by kind of the same method, that it needs all of the data dictionary records for a data catalog entry, or for an N8n workflow, or for all of the code in a GitHub repo. So all of these kind of have the same function of the highest level is on one table, and the rest of the records are linked on one or more other tables. Okay, so that's that's the idea with the context engine. And then the MPP tools is kind of the second half of that. This one is extract what are all of the current github records. So go get for this repo find all the folders and find all of the files, get the code, basically to sync GitHub with Airtable is one way to think of it. But there's also a prompt called the code generator and a few extra AI generated fields in the output format. So when it runs through the MCP tools workflow, it adds those extra fields and then upserts using the current records in In that case, the code related tables, the repositories, folders and files. So we had built all of these as separate workflows and then kind of over time they became consolidated on purpose to say it's only one or two extra nodes in order to run also code generator or also we have a tool for forms we use fill out so that's fill out filler. So really what we need to make sense of it is how can we reimagine all of this using Lengraph? What nodes do we need? What is really the central one? Is it just called context engine? And can that same node determine what context would be, or sorry, what tool or action would be relevant? No, what context that it can pull, and it can do the same thing that the MCP engine was doing, but based on the determination of the node and whatever chains it needs. So, do we want the same node to be asking which context is useful, and then also that same node to be gathering it? And I think this is where there may be some architecture questions.
+
+6:53 - Matthew Prisco
+Are those 24 nodes?
+
+6:55 - Matthew Prisco
+Or could it be one node with multiple chains that can go back and forth? So is it better to just put a lot more on this central node of really determining what context and gathering it, and then also calling those other tools? So it would need to connect for sure from the context engine slash decision maker slash task generator, maybe those are all the same node, or maybe those are two or three different nodes, and then that part is connected to a node that says it's the N8N Imaginator. That one is going to have additional resources and the output format for an N8N workflow. And then another one could be for softer drafter. It would have all the documentation from the Softer Help Center and obviously the output format for Softer. So we'll definitely talk more about these output formats. But at this point, the question would be, what nodes do we need for that central brain stuff? And that that's going to also be used even by the Slack So, or do we need another brain just for the Slack bot? But if it's going to be able to gather context from RAG and from Knowledge Graph and from these PCF constraint, kind of more unstructured text and just here's the main summary of what's important. So in a human readable format, but also in one doesn't require retrieving from a knowledge graph or from RAD. If we have that as this central context engine node, we would have multiple workflows could use that same node, I believe.
+
+9:04 - Ali Tallat
+Yes, so you see nodes in, nodes in LangRaph are just functional components that we connect based on what architecture we have laid out or what's the logic that we are trying to achieve. So I believe that yes, it's something that would come in handy and also what you were saying about how we architecture it is going to be the most crucial part because if you're looking at the scalability side, it's something that we need to consider from the start and make sure that it's something that we are consistently implementing from the ground up.
+
+9:45 - Matthew Prisco
+So that's, that's why I tried to break this up into three projects so that you could each focus on one, but there are a few points of intersection. So for sure, the, the context engine, the central brain would also be used by the, the Slack knowledge bot. And then also when the PCF parser finishes, so now we've just processed a new batch of meeting notes or recorded transcript from a call or Slack messages. So we want to automate it so that every day the Slack messages get processed and the points that are relevant for each what we call PCF is project component or feature. The PCF parser matches them and writes a summary and then stores the relevant points in RAG in Knowledge Graph and in PCF context, then it needs to say, I've processed this new stuff. What can we do with it? Send that to the central brain, which knows I could update a data dictionary using what we would call the data definer. Or I could try to draft the next version of a Slack work, sorry, N8n workflow based on the new information from that meeting or from the last day's slack, that kind of stuff. So both of these workflows either will use or trigger, I think in that case it could be the PCF parser's finished, it passes the, you know, the output from that batch to the central and then the central brain decides, do I do anything with it or not? So I think that would be important. And then the last part that I want to make sure I cover is, what are these new tables? And I view it the same as an MCP tool, or what we've been calling an MCP tool. So this would be our Lengraph tool, as it's unfortunately more tables, more complex, But a Lang Graph workflow in the same way that an N8n workflow would have nodes and prompts, a Lang Graph workflow can be represented as what are the Lang Graph nodes. There's a table for that. There's a table for the workflows. So first is the workflow, then is the nodes, then is the edges, then the conditions. Then on the Lang chain side, you have the chains, and those are going to be, I think, for sure linked to the nodes, and then you have the tools, and then there's this extra table that I have as lang chain tool templates, which I think would allow us at least to say this tool is at the chain level, but it's using one of our standard tool templates, and that that is going to be helpful. So I want to model that out with where each of the three of you represent at least parts of your workflow in this notation so that we can decide what is the right notation for that. And then what we'll do is create, you'll need to check the, you know, the other, the info side of the tables is data catalog, data dictionary, IO formats, field mappings. And rule sets. All of that combines so that...
+
+13:34 - Ali Tallat
+So basically validate everything, yeah?
+
+13:36 - Matthew Prisco
+That's for the validation and also for using for an extraction or for writing anything ETL. So it's ETL and validation. And we've already done so much for that, that this would then be, can we make the Lang Graph more scalable by creating a new MCP output format for whatever we want to call LanGraph. Usually I come up with silly names for it. So our LanGraph tool would be certain fields from each of those tables all linked together so that we could have the MCP, you know, the main brain could also say, as context the PCF parser Lengraph workflow. And it's going to bring certain fields from the workflow table, then linked fields or certain fields from linked records on all the way down. What is linked to that main workflow on each of the other tables and which fields do we need in the context portion? So there may be additional fields on all of those tables, but we'll need to isolate and basically do what we've already done for all of these other tools. And probably I'll have one of our freelancers that we've worked with on the N8N side who's done the output formats. It could be his part of this. To create actually those records. He created a data dictionary for each of the new tables. Then the IO format would be called Lang Graph Tool Output. And then there would be field mappings for each of the fields that we need. And then it would link to the data dictionary record for those fields so that it can be extracted, written, validated, dynamically so he has the knowledge and has done that part before but he would be doing it for this new you know output format this new tool and then what really your part would be to decide is what nodes what edges what chains what tools do we need to take what we have in any those two workflows and to make that work for LandGraph. So that's really, you know, the whole summary.
+
+16:30 - Ali Tallat
+It clears it all up and yeah, I'm glad I'm on the right table.
+
+16:38 - Matthew Prisco
+So, but that other table of MCP tools, we might come up with the use for it. We've got a similar name table in a different base. But yeah, with that one, I wouldn't make it a focal point for right now. If there's something that we decide for each...
+
+16:55 - Ali Tallat
+I think my focus should be on the existing and then workflows and see how I can...
+
+17:00 - Matthew Prisco
+Yes, and I'll recap just one more thing that I need to end because I've got another meeting.
+
+17:05 - Ali Tallat
+Yeah, no, I can go first and let you know.
+
+17:10 - Matthew Prisco
+Yeah, and I think going through, it's going to mean take the transcript, put it into the MCP tool, that we made and hopefully that will, as we develop that output format, the tool, or sorry, the GPT should be able to output in our format. So it could, really what we'll end up with is a designer that can say, we now need to, in our metadata format, draft a new LandGraph flow and we should be able to guide it. It's not going to get it perfect, but if we have a meeting, we parse it. Now it needs to say, we're going to do a LandGraph workflow. It should be able to draft that. So that's like what you're working on with LandGraph can also help us build a system to create LandGraph.
+
+18:08 - Ali Tallat
+To create more builders.
+
+18:11 - Matthew Prisco
+That would be the fourth workflow would be the LandGraph designer. But I think first, let's get the other tools working. But if you find it easier to try to think through how would we build a LandGraph workflow according to these tables and these fields, you could do that one first instead of the N8n version, which is the N8n Imaginator, or the softer version, which is the soft or the fill out form version, which is the fill out filler, you get my point? They're all gonna use the same idea. The question is, do we need nodes for each of these tools? Is that just easier? Or do we consolidate similar nodes that are using similar tools? The only difference is the prompt and the output format. That's the reason that we were able to consolidate the tools or all of these, you know, tools into that one workflow is because of the IO formats and the field mappings. It's feeding the output format dynamically or what it needs to extract. It's feeding that dynamically. And the prompt that goes with it based on what is the tool, here is the prompt. So does that allow us in LandGraph to make it so we don't need a node for each of those tools. And I think I said it this way on the call. It may be that we need multiple nodes for all of those tools, or some of those tools. So not even just one node per tool, but multiple nodes. Or it may be, yeah, one node per tool, that's the easiest way to do this. Or you could use categories of them and say, three are very similar they can be on the same node for fill out an n8n and and land graph but maybe some other ones need their own category node so we end up with just two different nodes or ten tools or can we in an extreme case put it that there's just one tool node and it can do all of the tool stuff that's a an open question.
+
+20:35 - Ali Tallat
+So I believe we should have at least one note for each, each of those components, since they are going to be serving it. Each is going to be serving a different purpose. And, um, it's something that would also help us to scale it in the future.
+
+20:51 - Matthew Prisco
+Uh, so yeah. I think that it can be done multiple ways. So my just kind of like, let's try for now. Let's try to limit it to one node per example. Just try, see if that works. Until we get to the point where we say this will not work unless the LanGraph tool has multiple nodes. But can it use, instead of multiple nodes, can it just have multiple chains or adding tools? I think we'll find that there's multiple ways it can be done.
+
+21:25 - Unidentified Speaker
+Yeah, I agree with you.
+
+21:29 - Matthew Prisco
+I'll share the meeting report that has the transcript, hopefully the transcript, you can combine it with some of the other documents that I've already shared, and that's really how I envision leveraging AI through this.
+
+21:46 - Ali Tallat
+Sure, sure. Yeah, sure.
+
+21:47 - Matthew Prisco
+Whatever else you get from the LLM, then you guide it. It's just a starting point. It's not saying that, you know, Chad GPT is going to build this workflow exactly like you imagined, but I think you can get moving in that direction, you know, a lot faster by using transcripts and documents.
+
+22:06 - Ali Tallat
+Yeah, I agree. All right. So I think I'm all cleared up. And for now, I'm going to keep my focus to converting these end-to-end workflows to, to the line graph framework and then see where we can go from there.
+
+22:20 - Matthew Prisco
+And specifically by trying to model it on those tables in Airtable because that's what the others are also doing. And then we'll compare, you can see what they put together. Maybe one person is, you know, splitting into a lot of nodes that we don't need or, you know, whatever. So you can evaluate each other's work also to make it consistent. It needs to feel like we've got one way of building. So that's why I want everybody to sort of model.
+
+22:52 - Unidentified Speaker
+standardize it.
+
+22:54 - Matthew Prisco
+Exactly and we may find that there are fields that we need to add to those tables or there's fields that we don't need or we need to make changes so I want to get the schema component so that we can create the output format.
+
+23:08 - Ali Tallat
+Yeah of course and I think it would be it would be a really crucial aspect since schema is what's going to validate.
+
+23:15 - Matthew Prisco
+Exactly right and if I can do it real quick right now I will send you because I don't think I sent it to you, but I sent it to some of the others, a summary of how those tables work. What are the relationships between data catalog, data dictionary, IO formats, field mappings, rule sets?
+
+23:34 - Ali Tallat
+All right. So please do send them over if it really, really helped me grab the context for that.
+
+23:41 - Matthew Prisco
+Very good. All right. I'll end it here. I'll send the link and I'll send that explanation.
+
+23:48 - Unidentified Speaker
+All right. Thank you. Thank you so much.

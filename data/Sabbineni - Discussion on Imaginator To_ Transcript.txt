@@ -1,0 +1,206 @@
+Sabbineni - Discussion on Imaginator Tool and MCP Engine Updates
+Thu, Jul 10, 2025
+
+0:00 - Dwayne Gibson
+Hey, Sri. How are you? All good, Wayne.
+
+0:06 - Unidentified Speaker
+How are you?
+
+0:08 - Dwayne Gibson
+Doing well. There we go. Long time no see.
+
+0:14 - Sabbineni Sri Harsha
+How have you been? All normal, man. Sorry.
+
+0:20 - Sabbineni Sri Harsha
+I said mad.
+
+0:22 - Sabbineni Sri Harsha
+Oh, no.
+
+0:24 - Sabbineni Sri Harsha
+It's OK.
+
+0:28 - Dwayne Gibson
+Yeah, no, go ahead.
+
+0:30 - Sabbineni Sri Harsha
+I just tried the animating imaginator and I got a prompt. It took some time. I'm not sure like the output is running or not. I was not sure whether it's running or not. And then finally I got a prompt, but the prompt was so long. For my charge EPT.
+
+0:54 - Dwayne Gibson
+So what are you calling?
+
+0:56 - Sabbineni Sri Harsha
+the imaginator.
+
+0:57 - Sabbineni Sri Harsha
+I said, what are you calling the imaginator?
+
+1:01 - Dwayne Gibson
+What is the imaginator that you're calling? So are you calling the whole tool the imaginator or one option of the tool the imaginator? Because that was some of the confusion we had before. I think Afolabi had the same confusion. Let me show you. Um, did you see the option? Yeah, an option. So you should it's the entire tool is MCP engine, right?
+
+1:36 - Unidentified Speaker
+Yeah.
+
+1:36 - Unidentified Speaker
+Okay.
+
+1:37 - Sabbineni Sri Harsha
+Yeah. Yeah.
+
+1:38 - Dwayne Gibson
+Matt has gone through and just updated all of the prompts. I think yesterday or the day before yesterday, he had them updated. Let me open air table. When did you test it, just now? Yeah, just a few minutes ago. And you're going to the Master Project Base tool run table? Or tool run? Yes. So, the last... The the crackling yeah like hold on let me see if it's me it's mine like I can see my microphone uh like it's running even when I'm not talking Sounds like digital popcorn.
+
+2:55 - Sabbineni Sri Harsha
+Is it like so disturbing?
+
+3:00 - Dwayne Gibson
+that's not the worst screen for a second, Sri. So we'll scroll to the bottom. This must be your test and let's see the prompt is indeed long so all of that is still still prompt. Okay, so this part is where the context should be added on and this is where we're testing at now. So the changes that happened yesterday was that Matt had Alicia go And we have two tables in a in. Oh, wait, it's not here. It's a different base. We have two tables on the data strategy base for N8n. One is for workflows. It is a, each record is the entire N8n workflow. And then N8n nodes, which will have every node of that workflow. So, I think it needs to be We need to find a way to update it because obviously every time you change anything inside of the N8n workflow, any of the settings inside the nodes, you would have to have it updated, especially when you add nodes or rename them. But let's see, where are we? N8n nodes. And these are the nodes for the MCP engine. So I think we have 78 records. There are more nodes in the workflow than that. But I am assuming now we can confirm with Apolabi and Elisha that those 78 nodes are the functional nodes of the workflow. So there might be some that were test or used for building functionality. You can see here. You can see here there are some nodes that were are not connected. So imagining that those 78 represent all of our connected nodes. So Elisha yesterday went back through, he first extracted using the N8n Imaginator, he extracted the N8n workflow record. So we have one record for The main field here would be the full workflow JSON. And I have not checked to see if it captured the entire workflow. But if it did, it would be a massive JSON file. And this looks too small. So this might be a limitation of Airtable. And it's a long text field. But I don't know if you are familiar with downloading the JSON from N8n, but it is as simple as here, come, download, and then maybe we should have an attachment. Does that make sense?
+
+7:58 - Sabbineni Sri Harsha
+Yes.
+
+7:58 - Dwayne Gibson
+So that's what's supposed to be stored here is the full JSON. And then there's a couple other fields for description for the workloads and whatnot. And it in nodes, one of the functions of the imaginator is to create names for the nodes so that they are not the default names that the innate names them. So, we have some unique names for the MCP engine existing here on this table. Yesterday, Alicia went through and actually renamed that.
+
+8:42 - Sabbineni Sri Harsha
+Are these nodes named automatically? Or is this process manual?
+
+8:49 - Dwayne Gibson
+It's manual.
+
+8:50 - Dwayne Gibson
+So, now, with the EnableImaginator, the The primary purpose of that prompt should be to create a new innate in workflow So when it does it it should tell you, you know use this type of node from innate in So it should give you the innate in node name You know and then tell you what to name it unique to the workflow So it should do both but it would still be man But we are we should be caught up now. It's a point that we should have completely unique names for these nodes That was the last thing Alicia did yesterday. I think these are extra nodes and I think There are even some more extra nodes. But one of the first things I'll work on today is Getting this prompt context Completely filled inside the innate in We have more fields for each node. So this is intended to capture, one, the JSON for the node. So it should have the full configuration. So you should be able to just copy this and paste it inside of n8n and completely reproduce this node with all of its configurations. If it has prompt, the prompt text should be here for the node. So right now, apparently, all of our prompts are being dealt with by one node, and it is. OK, so this is a point of contention. That we need to figure out, and I will test for today. At one point when they built the MCP engine, and I think that's what these nodes are, each node was one of the tools. So there was a node for the prompt prompter. There was a node for the imaginator. There was a node for the PCF writer. And then once we consolidated, it was all handled by one node. And that's currently what it looks like, Get tool prompt. And that's what it says here. Except what is happening in actuality is different. And when I download the MTP engine JSON and I give it to chat GPT, it says that it is getting its prompt from this table, which some of these prompts are on this table, as you can see, but this is not where it's supposed to draw the prompts from So we can add a prompt as context, and if we're adding a prompt as context, it can draw from this table. Or from this prompt table. But one thing that I am noticing is that I see the tool and my suspicion the tool is drawing the prompt from the AI prompt table or master projects and writing it. So I am going to run this test with the fill out filler. I replaced this prompt temporarily, so I saved the actual prompt and I put this text instead. So my suspicion that was happening and maybe it is fixed by now, now is that the MCP engine was giving the prompt from this table, running it through the engine and then writing it back to this table. So the mat initially was updating the prompts on this table and they were getting overwritten as soon as he would, uh, finish writing them. So, that was two days ago. So, we still haven't confirmed that. So, that's one thing that needs to be confirmed with testing is exactly how the prompt are working. There are two different ways the prompt should work. One as the system prompt, you know, when you select in the tool which tool you want, PCF writer, PRD writer, prompt prompter, and once as context. If you want to add it as context. So that's one thing that we need to test. And the second thing that we need to test that I'm going to work on today is kind of what you have seen when you go to the tool run table.
+
+14:12 - Sabbineni Sri Harsha
+Are you still there?
+
+14:13 - Dwayne Gibson
+Yes. OK. When you go to Tool Runs to confirm that every kind of text, let me, give me one second, let me open Let me open the tool.
+
+14:51 - Unidentified Speaker
+All right.
+
+14:59 - Dwayne Gibson
+Just shared the link to the form and pinned it to your channel This is Matt here Hey, Matt, hey, how's it going? I want to meet with Sri say hi Sri What's up Sri?
+
+15:22 - Dwayne Gibson
+What are you guys talking about it MC?
+
+15:27 - Dwayne Gibson
+Yeah, I was just catching them up on the changes from yesterday. I was just telling them about the node naming the the two tables for the workflows and the nodes the prompt and the What we want the prompts to actually do and some of the issues that we've been having Let them know that you just updated all of the prompts yesterday, right? So Where we stand the two different prompt tables and the ability to use prompts as context. And then I was going to walk him through the current stage of testing to make sure every context is attached correctly.
+
+16:10 - Dwayne Gibson
+And then obviously the feedback I'm hoping for is like I know Sri can build stuff on his own too. I want to see also Ken. Can he work the in this case and it an imaginator into his process partially so we can get feedback on the imaginator? Partially so that he can say Yeah, this actually did help me come up with a better plan faster And then we can hopefully show other people how to do the same thing Got it All right, yeah, we can chat after you guys finish.
+
+16:54 - Unidentified Speaker
+OK.
+
+16:54 - Unidentified Speaker
+Bye.
+
+16:55 - Unidentified Speaker
+Bye.
+
+16:55 - Sabbineni Sri Harsha
+Dwayne, since the prompt is too long, I'll try to add it as a document. I'll see if I can get something out of it.
+
+17:07 - Dwayne Gibson
+Yeah, so I brought that up at our last meeting. So I think my personal opinion is that we are putting much into the context window, and I think it's going to degrade our results. Not only is the prompt really long, I think the prompt itself is long enough that the LLM will start to ignore parts of the beginning by the time it gets to the end. And that is before, come on laptop, that is before before we start attaching context. So if we have this last one, this code generator is the one that I did right before yours. So we have all of that as a prompt. We get through that. Then we get to the actual context. Right now, one issue that we're having is that when I something that should be a list of records like when we go to namespace I select data catalog and then the data catalog I select is the master projects team table that is a list of 60 records on the team table and one of the ways that Matt wants that used is that We can give it field mapping so we can select the data dictionary of you know the Benefits table and then we can use that with the code generator and create actual Software the problem is that right now It is not attaching the entire record so it is only from here to to here. And that is not enough. I mean, that can be maybe three records and it looks like more of a schema instead of the actual records. So. Yeah, it's just giving the schema and Yeah, it's just given the schema for the tables instead of the actual tables. Another thing that we need to change is that I think every time it gives context we want a heading so it's easy to test and check and it needs to be bold so that we can quickly find it so this is easy context one data dictionary see where it starts we need to see where it ends context two is the additional instructions from the form selected language Apps Script, I selected another prompt as input called the standardizer. It did not include the prompt, it just included its name. So that's another thing we need to. Oh no, it actually did. Here it is. So it did include the standardizer prompt. So that worked. But I'm going to make a list today of each type of context and we can share it with the team and just check off if we have successfully received that context in the prompt. But I think to your question, this entire body of text is too much and it didn't even do it correctly. So if it had done it correctly, it would be seven times this length because it would have data dictionary records. And if we were doing something where we were programming and we had the data catalog and we needed to say add multiple tables. So let's say that we were doing something with customers, customer success tables, and we needed the company's table, and we needed records from investors, contacts, and the opportunities table. And we were to add all of those and some additional instructions. Like all of this, I think, is going to be too long. So I think for testing, we're going to run into that issue, but we'll find out. And I think that maybe the Late in version of the Imaginator where it doesn't stop here. Where it doesn't just output here when it completely runs and gives this context, this text to the API. The LLM, we might get better results. But I think while we're copying and pasting, we're going to have some issues.
+
+22:32 - Sabbineni Sri Harsha
+And I think your solution is going to be better putting some of it as a document. I watched the recording, you were mentioning like, you were talking about prompts, different LLMs and all Like from that, like I remember Matt mentioned, it's better to take a, an account for all of us. Whatever prompts we are running, we will use that. One chat GPT account.
+
+23:11 - Dwayne Gibson
+One chat GPT account. Use that for all of the testing?
+
+23:18 - Sabbineni Sri Harsha
+It's like for regular operations like all the freelancers are going to use the same ChargPT because as we use it, it will have the context already about beta fits.
+
+23:37 - Dwayne Gibson
+So I started And I can finish so the goal Matt wants to be more deliberate about it. This is just quickly Chat GPT lets you build a custom GPT And you can edit it. And so we could create this GPT. First, this model 4.0 is garbage. Horrible. Horrible. So already the fact that we only have this one and 4.1 is a Huge red flag for me. But I'd rather still have this for coding and analysis because it's more rational. But we can configure it so we can give it this block of instructions. I think it is 1500 words. Or 1500 tokens. I initially did it for the ROI project, but we can we can reframe it and give it instructions for MCP engine testing. And then we can give it files. I think 20 files. So most of its knowledge can be stored in these files. So we could give it something about beta fits in general, the goals that we want. We could give it one of the files could be a the JSON of the workflow, but we'd have to update that as we change the workflow. But we could build this model that everyone could use. And I think it would only be slightly better than the free of ChatGPT. One benefit is I think that the free version might limit the attachments that you can use and the output and this will let you upload more types of files. So if you think it's worth it, I can spend some time and update it and What I meant was like, currently I'm using ChargeBT on my account, right?
+
+26:21 - Sabbineni Sri Harsha
+Like everyone is using ChargeBT on their own accounts. And in the meeting, Matt said that he has a pro version of ChargeBT. And when Matt asked something, ChargeBT already knows a good amount of things about benefits. It's a little bit more accurate than what we get usually on our personal accounts. So Matt suggested having a single account which knows about beta fits and we'll be using the same account, something like that.
+
+27:01 - Dwayne Gibson
+Yeah, so that's a longer term issue. That's the same thing. So I have that as well. Let's see if I have talked about you, Sri. I think I have shared the entire Slack conversation searching the web. Nope, no, I didn't give it about you. Sri, your name is a title for deities or dignitaries?
+
+27:56 - Sabbineni Sri Harsha
+In one way it is God of prosperity. It's like actually goddess of prosperity. It's not a god goddess and We call it like you say sir, right?
+
+28:10 - Dwayne Gibson
+For people.
+
+28:11 - Dwayne Gibson
+Yeah, it's like we say something in there, but it got into my name Okay, let's ask if this big if it's MCP engine we've been having a lot of conversations about it. But yes, the paid versions of ChatGPT have this version here. And the models are massively different. It is very big difference with each model that you use so GPD 4 is garbage Just look at these two answers look at look at what they did I've copy pasted the exact same thing. These are two different models The first one was 4.1. I asked it. What is the beta fits MCP engine? I couldn't find public documentation and It searched the web basically it didn't search its built-in memory Which it had access to I could have prompted it it would have taken a conversation to me to force it search your own memory Versus o3 which is my favorite model so far and It said the MCP engine is the firm's modular automation back backbone set of na in orchestrated workload that pull structured inputs, fill out form, air table records, blah, blah, blah. Because I've had so many conversations about all of this with it. So it has all of this knowledge to it. The issue is how do you share this with the team? Like we could start a new account, but practically there's no way to share this with the team. While we're working on the MCP. There's. You get what I'm saying, Sri? So there is no quick solution is what you mean.
+
+30:30 - Dwayne Gibson
+Yeah, there's no quick solution.
+
+30:33 - Sabbineni Sri Harsha
+Not related to MCP like while I was thinking about MCP and the prongs it's generating. Do you know about RAG?
+
+30:47 - Dwayne Gibson
+Yeah, I built one RAG model probably five, six months ago. And I stopped building it because I ran into, I found a limitation for it. The way that the embeddings are broken up, kind of limit the value depending on what you're doing. So my understanding and how it was explained to me by the LLM is that take this sentence, take this text here, and say you turned it into an embedding. It's going to break this up into things like this, in an orchestrated workflow. It's going to give that a number. Then it'll give this a number. And it might put that number close to this other number. And then it might give this a number. And it might be close to all of these numbers. So when you put an input, your input is turned into a number. And then it searches for other bits of data that are numerically close to that number. The problem is sometimes every single word in a sentence needs to be analyzed and the order of the word can completely change the meaning of that sentence. And I find that a lot. One of my biggest problems using LLMs is ambiguity and instructions and for what it understands and what it returns. So like if I was asking. About a meeting, if if we had a meeting and we started in a rag. And I was to ask something like, What did Sri mean when he said I am going to the bathroom? I'll be right back like it. It would find the text depending on what you said. It would find that text and it would be broken up and the LLM could easily get confused about what exactly you were doing. Like if you said I was walking by the bathroom or I have two bathrooms like, So I think there is a use case for RAG. I think that it just has to be very carefully done. I think it is more data related. Is useful. I think when there is ambiguity and context contextual meaning in the data, I don't think RAG is a good I think. Hold on, let's try this. What are some limitations of RAG with the way that the data is turned into tokens and embedded? And is there any contextual loss of data when retrieved? If so, what are some solutions? When documents are chunked, there's a loss of relationship. Yeah, so this is the main thing. Cut citation tables or co-reference ideas so embeddings miss long range context. Answers may need information that sits partly in another chunk, causing retrieval favors, failures or hallucinations. So when I built my rag, I was I put together a bunch of academic data or marketing and then I started asking it questions and then I would go to the very I'd ask it questions I knew the answer to. And then I would go to the very sentence and see how well it retrieved it and what I found was that it was only retrieving bits and pieces of each sentence and then giving that to the LLM the LLM was having to fill in the blanks and it was hallucinating and it was doing it a lot it was doing it multiple times each sentence I was thinking like we can use the rag I was thinking we can use RAC for prompting instead of the MCP, but now it looks like it's not going to work. No, no. We may be able to. There is a solution. That's why I asked. It's like a context aware, contextual retrieval. Like a graphical, I forget what it's called. This would be costly, long context, the chunks can be bigger. I think that you just have to be very deliberate. There are a lot of different embedding models and what most people do is they just grab have the default embedding model. I think OpenAI has one that's really popular. I just don't think those work very well. And you have to, you have to use some of these methods. So I think if we do it, we'd have to use some of these methods to mitigate the context loss. Or we could do this. Number six alone could do it. We could just chunk the, um, we could chunk the entire prompt into like three chunks, like three big chunks and then retrieve it. And that way, uh, I think anything that we don't have this context, this much context going into the prompt window, I think the main thing is that the LLM treats this, this prompt window, different. Let me confirm that. Do LLMs treat the online UI context window differently than they do when they receive via the It's nice to see how it is showing like how it is thinking also Yeah, these these thinking models are so much more powerful than the 4.0 the the 4.0 model which Tree I have caught it so many times being lazy where it'll give me an answer and it'll make no sense And then I'll dig into why it gave me that answer. It'll be a 10-minute conversation And at the end of it, it will admit that it was doing it to save OpenAI money because it cost compute hours on their servers. So instead of doing the actual work and thinking through it, it just guesses. A lot of the time it guesses. One time it even admitted that it didn't Read my entire prompt. Okay, so it says, every token is the same way, web, API, or reg. What does differ around the model. So it looks like there are some Not big differences, but subtle differences in how it access it.
+
+40:26 - Unidentified Speaker
+Okay, I know it's late your time, Sheree.
+
+40:31 - Dwayne Gibson
+I will leave you a message on where we end up on the testing today. And I think we need some kind of centralized document. Where we have the items that we want to test and the status of that test so that we can all look at it and know where we are. So I'll put something like that together and share it with you.
+
+41:02 - Sabbineni Sri Harsha
+We wanted to say one more thing like since we are automatically tracking the data dictionary and the air table schema and we are also doing the same with GitHub. Can we also do this same with N8n instead of manually filling in the nodes and all? Can we automate this process?
+
+41:26 - Dwayne Gibson
+I bet we can. Is there a way via API that we can grab the JSON from N8n and update a record in Airtable with that JSON?
+
+41:40 - Sabbineni Sri Harsha
+Doing what is the name of the workflow for a table the data dictionary workflow.
+
+42:08 - Dwayne Gibson
+What do you mean? The data dictionary workflow?
+
+42:12 - Sabbineni Sri Harsha
+You mean in N8n?
+
+42:14 - Sabbineni Sri Harsha
+In N8n.
+
+42:15 - Dwayne Gibson
+Alpha Lab is currently building it, right? Here are all of our workflows by last updated. So we have the MCP engine. I opened this just as a test because we need to delete some of these extra a meeting extractor. This is an extraction workflow that pulls out a document, the transformation engine, and the fill out form schema extractor, the quoting engine, commission statement. I'm not sure what you're referring to with the Data Dictionary.
+
+43:05 - Sabbineni Sri Harsha
+I believe Aflabi is currently working on one N8n workflow, which automates the data dictionary, like whatever you have built in Google Sheets using scripts. I think you're trying to automate it using N8n. Matt said Aflabi will be doing that, and I'll be doing the Git I'm not sure.
+
+43:32 - Dwayne Gibson
+We have to check with Matt on that.
+
+43:38 - Sabbineni Sri Harsha
+All right.
+
+43:40 - Dwayne Gibson
+The data dictionary. Yes, it says. We can get the API to pull the JSON and update it in their table. Uh, the innate and imaginator will probably be a good tool to, um, use this. I bet. I bet the imaginator and then you add this as a additional prompt. Give it the tables Schema give it the n8n nodes table schema so that it can create in this Setup These two tables the workflow and the nodes and I bet it can output the well not output I bet it can write directly to each of these tables so I think it's doable it's doing it's late as As I said, it is 6am for you.
+
+45:20 - Sabbineni Sri Harsha
+It would be 6am for you. Okay.
+
+45:23 - Dwayne Gibson
+So then I'll just set, I'll just set the message to deliver like 6 for you, or 6 my time, so you'll see it when you start.
+
+45:35 - Sabbineni Sri Harsha
+Should we?
+
+45:36 - Sabbineni Sri Harsha
+You can send it any time, like...
+
+45:39 - Dwayne Gibson
+You know, the driving crazy, hearing dings, dings, Okay. Yeah.
+
+45:46 - Unidentified Speaker
+All right.
+
+45:49 - Dwayne Gibson
+Bye. Thanks. Bye.

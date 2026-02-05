@@ -1,0 +1,908 @@
+Afolabi - MCP Namespace Context 7-9-25
+Wed, Jul 9, 2025
+
+0:00 - Dwayne Gibson
+Hello, Dwayne.
+
+0:01 - Dwayne Gibson
+Hey, Alphalabi.
+
+0:02 - Afolabi Dave
+How are you?
+
+0:04 - Afolabi Dave
+It's been a while. How are you, Dwayne?
+
+0:09 - Dwayne Gibson
+I hope you're fine.
+
+0:11 - Unidentified Speaker
+Yes, I am.
+
+0:12 - Afolabi Dave
+It has been a while.
+
+0:15 - Afolabi Dave
+You had exams? Yeah, it has. I'm so sorry. Yeah, I'm writing my final master's Nice.
+
+0:26 - Unidentified Speaker
+Keeping you busy.
+
+0:28 - Dwayne Gibson
+Yeah, you're going to go for a dollar.
+
+0:33 - Afolabi Dave
+Yeah, I actually I am not sure I'm actually might go for a PhD. I might not.
+
+0:46 - Unidentified Speaker
+Well, it depends.
+
+0:50 - Afolabi Dave
+We depend actually.
+
+0:52 - Unidentified Speaker
+Alright, let me tell my time in the nature.
+
+0:59 - Dwayne Gibson
+OK, I'm gonna join with my.
+
+1:03 - Dwayne Gibson
+desktop right quick.
+
+1:05 - Unidentified Speaker
+All right.
+
+1:59 - Dwayne Gibson
+Okay, let me share my screen here while we wait for Matthew.
+
+2:15 - Unidentified Speaker
+All right, I'm going to run a test right quick off the lobby.
+
+2:33 - Dwayne Gibson
+We will do it with. Let's see. Let's do PRD Rider. We'll just add PCF. Actually, let me check and see which one has a PRD. Nashville Venture.
+
+3:07 - Matthew Prisco
+That's an interesting choice to have a PRD for. It wasn't my choice to make it.
+
+3:18 - Dwayne Gibson
+Remember when we were testing the first version of the PRD prompt, I just gave it to the LLM and asked it which which PCS were complete enough for PRD. So, we'll give it that. We'll select a namespace. Let's select a... Can you select the namespace type before the namespace?
+
+3:49 - Matthew Prisco
+I can. And that's something I think we still need to get it to filter, we said, right?
+
+4:00 - Dwayne Gibson
+Yeah. This is not actually going to do anything. Yeah, it's not doing anything different. But we'll go to Data Catalog and pick tables that we know have records on them. Opportunities has records. Let's see Softer Portal 2. Let's see a Softer Portal. Princeton portal, and data catalogs team. Okay, so those are three tables that definitely have, and then let's also check does.
+
+4:40 - Matthew Prisco
+Do one for a field mapping too. So those should grab the field mappings, right? No, you need to grab a transformation project or It needs to be one that has mappings, so I don't know if Mega Census does. Do an output format type Benefiter Census. I guess you'll find it. Yeah.
+
+5:18 - Dwayne Gibson
+All right, so this is tested for a few different types of context we should get on the tool run table. I've noticed that it takes up to 30 seconds for this to populate.
+
+5:42 - Afolabi Dave
+Yeah, it does. And mr. Such a lot of things Hey, I'll follow me.
+
+5:50 - Unidentified Speaker
+How you doing? Fine.
+
+5:52 - Matthew Prisco
+Thank you. Good.
+
+5:53 - Matthew Prisco
+I think my camera's not working on But said my camera's in use somewhere else so I don't know why that is but oh You're being spied on man.
+
+6:05 - Dwayne Gibson
+Oh We got additional instructions are being inserted or at least they're coming into the table It's coming into the top?
+
+6:14 - Matthew Prisco
+Oh, no. Okay. It's coming into the table. I see. Sorry. I thought that was a prompt context.
+
+6:21 - Dwayne Gibson
+Then we have all of our namespaces. So, if the workflow is grabbing this correctly, we have it. I didn't check PCF, so that might throw a kink in it. We'll see if it grabs the PCF still or the PRT.
+
+6:38 - Matthew Prisco
+Ideally, it would not grab. Because you didn't request it.
+
+6:44 - Dwayne Gibson
+Yeah. So I would think by now.
+
+6:49 - Matthew Prisco
+Wayne, just another concept that is kind of relevant here, but doing a tool run that is specifically geared towards the PCF, like the official tool run. For this PCF, we want you to have this context, this context, this context, so that it's easy for us to just pull that prompt context when iterating throughout the project. So it's not everybody ad hoc just running the tool run. They could do that in addition to it, but we can do a tool run, link that to the PCF, and then make that easy for the person to access. If we think these tables are relevant, obviously a field mapping is critical if it's existing for that task. You want to link these tool run records to PCFs?
+
+7:49 - Unidentified Speaker
+Correct.
+
+7:50 - Matthew Prisco
+So not just requesting the PCF, I think it'd be a second way to link the tables would be to say that this tool run is now linked to this PCF, like officially. I see.
+
+8:05 - Dwayne Gibson
+So we would add a link record here. Right.
+
+8:09 - Matthew Prisco
+It's already linked to that table, but this was an idea I was playing with yesterday. I see. No, I did add it, the PCF context. So that would be after you run the tool run, you can make it, you know, officially linked to the PCF. And then we will be able to to just have that prompt plus context sitting on the project portal.
+
+8:35 - Dwayne Gibson
+I see.
+
+8:36 - Dwayne Gibson
+Alpha Lobby, so I haven't noticed this before, but with the executions, I'm seeing we're getting an error here, and it seems like I should have been checking this before so I can see where we're succeeding and where we're getting errors.
+
+8:53 - Matthew Prisco
+I'm guessing it's based on the context, Some of them are working and some of them are not.
+
+9:01 - Dwayne Gibson
+Well, it says rule sets getter. It's the node that it rules.
+
+9:06 - Afolabi Dave
+You can just check the node where it give an error and I can tell you exactly what costs the error.
+
+9:14 - Matthew Prisco
+Well, it says rule sets getter, but the first thing is I thought on the MCP engine that Alicia had updated all the node names. Or renamed things, and rulesets getter would be, I think that the convention that came from the N8N Imaginator and from the LLM side would be get ruleset as opposed to calling it ruleset getter. The other thing is, I don't think we need rulesets for this. Rulesets is for transformation engine, not MCP engine. Okay.
+
+9:54 - Afolabi Dave
+So, um, Dwayne, the reason why you're getting an error is probably because the same resource could not be found. So that particular record ID on rulesets, could you check on data strategy to see if we still have a record with this particular All right, let me see where's the record ID is here. And I think I gave an error node. I added an error node to every, an error output to every node. I added an error output to every node. So when you get an error, it just sends the error forward. Okay.
+
+10:38 - Dwayne Gibson
+Well, so I have every single one of these as a record ID. So I have dozens of them here. From the field, looks like from field mappings table. This is from field mappings, yeah.
+
+10:51 - Afolabi Dave
+But linked to rulesets as its own record ID. Right. Just, yeah, so this is the record ID we are seeing it. Before we check on...
+
+11:01 - Matthew Prisco
+We could keep talking about it, but I think the automation doesn't need to go to rulesets at all, and doesn't need to go to regex conversion table at all. Needs to go to the field mappings table, look for the record or the records that are linked to the record that was selected from the namespace, and then it needs to know, give us this field and this field and this field and this field. In this case, nothing else is off that table. It's only on the field mappings table.
+
+11:37 - Afolabi Dave
+Alright, so I will talk to Alicia or I can do it myself. It's quite simple, but I don't want to mess up what he has done. Basically, all we need to do is delete these rulesets getter, the rulesets getter node, and the field mappings is already corrected. I think he already has a node, or rather, I think I did a node there. Yeah, I did a node there, field mappings, I guess the field mappings already. So all we just need to do is delete the rulesets and delete, we don't Formatting rules, do we, Matthew? Formatting rule getter, do we need it? No. So we can delete that as well and just send the field mappings forward. If you scroll back, can you go back a bit to, yeah, can I see field mapping getter? Yes, it already got all the fields that are linked to the namespace that was clicked here. So, we just delete the other nodes, and that's all. Does that answer your question, Mark, or Dwayne, rather? So, here's what I'm seeing now. I'm not sure what this node does here.
+
+12:52 - Dwayne Gibson
+So, it says it's field mapping getter. What I think that we need to... Here's what I understand. We're going to delete these two nodes here. We don't need them, understood. So we could, I don't see why we can't just delete them now and connect them.
+
+13:11 - Afolabi Dave
+Is there any reason why not to, Afolabi? Yeah, if we delete them now, we still need to make changes to the other nodes because the way we did it is everything is connected. So we, yeah, so we are sending all the JSONs to all the nodes directly. So this format getter and ruleset getter are sending an output to output for my context merger.
+
+13:35 - Matthew Prisco
+Just so that we start thinking about it in terms of the next steps. My preference is to get this fixed, is to have you work on it directly. I think as a priority over the data dictionary automation, rather than to try to explain this to Alicia, hope he understands it back and forth, all of that. So you that whatever we decide you're going to go in anyway. So if you want to delete them now and you can make the adjustments to reconnect them or just wait until after the call, that's fine too.
+
+14:15 - Afolabi Dave
+Okay. No problem then. No problem. That's fine. I'll delete it myself.
+
+14:19 - Matthew Prisco
+Okay. Um, so let me just kind of frame the way I'm thinking about all of these namespace options and I guess I can go through them. And maybe the most important ones to me are the data dictionary type and the field mappings type. One of the inconsistencies we have right now is that we're calling that data catalog when really we are, I'm thinking of it as the data dictionary, but we use the data catalog to identify which records are linked to gather them data dictionary table. So, you know, just making sure that's clear again, even though it's definitely inconsistent in how we're talking about it, how it appears on the forms, all of that. So, that's how it works for data catalog, data dictionary.
+
+15:15 - Dwayne Gibson
+Matthew, you're talking about these records here, these tables.
+
+15:19 - Matthew Prisco
+What table are you on? Namespaces? Namespaces. So, the question is, is the namespace type data catalog and is the namespace type output format and transformation project is even more confusing because there are two namespace types that are supposed to do the same thing, which is go to the field mapping table and get us certain fields.
+
+15:51 - Unidentified Speaker
+Yes.
+
+15:54 - Matthew Prisco
+So we could reconfigure that a bit to name the namespace data dictionary and field mappings, particularly field mappings, feels more direct with what we're trying to get from it. But the fact that those field mappings may need to be filtered by a transformation project or by or by the input output format.
+
+16:25 - Dwayne Gibson
+I see the transformation project field input output format is is that a field of field mappings? I think there would need to be a link to both of them and they should be next to each other.
+
+16:43 - Matthew Prisco
+They are. It's the empty one because those ones are for transformation projects If you keep going down, once you hit an input output, you'll see it switches. I see. There are some other things me and Afalabi have been experimenting with where for the quoting engine, things that apply to the whole quote, meaning what are the output formats that we need, are all linked with the quote as the transformation project. So a transformation project has input-output formats. We may end up sort of, I don't know, maybe making all of the input-output formats just on the field mappings, but it doesn't feel the same when we're doing a script, when it's a web scraper, or if it's taking from Airtable and moving stuff around. That feels like a transformation project, not one of the input output. So because of all that, it's sort of messy right now.
+
+17:54 - Dwayne Gibson
+So what I'm trying to understand is you're saying these two different fields, transformation projects and input output, these are the fields that we will key on from the MCP engine to filter this tape and collect the records.
+
+18:09 - Matthew Prisco
+Correct. So we are selecting the namespace on the basis of a data catalog record, meaning a table, or if it's for field mappings, we're selecting it on the basis of the transformation project or the output format.
+
+18:25 - Dwayne Gibson
+So that would be here. So this, I would select transformation projects here.
+
+18:30 - Matthew Prisco
+Correct, or output formats, or we consolidate that, call it field mappings, and then you just pick the field mapping off the namespace, and then the MCP engine would need to know Based off of the way, it's linked whether it has to find that record on transformation engine or sorry on transformation projects or on output This part here on the form is meant to filter this button correct correct So what I would like us to do would be to change the namespace type To field mappings because that's intuitively what we're trying to do get, but then the field mappings would be linked to the correct table. So that's something we can look at later on how we're setting up the namespaces table, but I think we could streamline that. But then, Afolabi, in terms of the node structure, we probably have two separate nodes right now, one to gather on the record, or do we need the record? Yeah, I guess we would need to gather the record ID from the transformation projects table or from the output format table. Then it needs to go to the field mappings table, filter for the ones that are linked to that record, and we need to make sure that we're telling it exactly which fields we want from the field mapping table, which is really what we're after. And Afolabi, I don't know if from, you know, looking before the call, could you explain what is currently set up? It seems like it's not working, but is that design of go to the field mapping table and get certain fields? What are those fields? And then we can address Do we need to add more fields to that?
+
+20:39 - Dwayne Gibson
+And not the lobby. I can show you what I got when I have run a test. Let me see which one I did.
+
+20:53 - Unidentified Speaker
+I attached PCL context, PRD context.
+
+20:56 - Dwayne Gibson
+All right, here's data. Dictionary. This one looks like it attached. This is the one.
+
+21:04 - Matthew Prisco
+Is that complete or is it just the table name like you were saying?
+
+21:10 - Dwayne Gibson
+No, this is the one that attached the I'm not sure what table it connected but only partial of the table so you can see.
+
+21:22 - Matthew Prisco
+Field type. Hold on. Oh, it's data dictionary.
+
+21:26 - Unidentified Speaker
+Yeah.
+
+21:26 - Matthew Prisco
+That seems Reasonable. But the size doesn't seem reasonable.
+
+21:30 - Unidentified Speaker
+If you look at it.
+
+21:32 - Matthew Prisco
+I see what you mean.
+
+21:34 - Dwayne Gibson
+That's only at most a couple of records. Let me see if I can find a complete one.
+
+21:41 - Unidentified Speaker
+I see what you mean. OK.
+
+21:44 - Dwayne Gibson
+OK, so here is where we're getting. When I am attaching, I don't think. OK, here is an example. This is what I'm getting most of the time when I attach the way I just did on that namespace. All I'm getting is the JSON for the table record, right? Right. The metadata.
+
+22:06 - Matthew Prisco
+First thing I would say, Dwayne, is go to the namespace table and let's see how that's configured.
+
+22:14 - Afolabi Dave
+If it's not linked to anything, it's not going to get anything for you.
+
+22:21 - Dwayne Gibson
+We're linked to data catalog.
+
+22:23 - Matthew Prisco
+Which one is this?
+
+22:26 - Dwayne Gibson
+business namespace. So these are the tables that I added yesterday, Matthew. So if I selected data catalog, customer success benefits, we could come to this field, link to benefits. I see. Come back and then we should be able to access the dictionary records.
+
+22:47 - Matthew Prisco
+What was the name of that one?
+
+22:50 - Unidentified Speaker
+Benefit guide?
+
+22:51 - Matthew Prisco
+Benefit guide wouldn't be that wouldn't be a namespace for data catalog now this is this is this is when you select the transformation project it adds that there so oh okay but the point is that this is a data catalog type so you should only be yeah so that's that's fine the question is why why was the transformation project like this is a namespace for data catalog so should just be pick a table.
+
+23:21 - Dwayne Gibson
+So I should be able to pick this record if I select it through the form all the way through the link to these records. Right. And this is what it should be giving as context. Correct.
+
+23:37 - Matthew Prisco
+Well whichever fields we're telling it but it should go to all those records.
+
+23:43 - Afolabi Dave
+It's not what we're getting. It's just this.
+
+23:47 - Dwayne Gibson
+Okay. So what could be causing that?
+
+23:50 - Unidentified Speaker
+Okay.
+
+23:51 - Afolabi Dave
+Um, I will run a test on it and I will say exactly what the issue is because it should actually, okay. Um, Matthew, you said something about me telling the exact field to give. Yes. The way you, imagine it, is it the field links to that record or how does it know it? Because the way I did it before was the field links to a particular record. Let's say, um, customer success, table name is company, and you are trying to get speak on specific field leads to link to a particular record on the data catalog. Is that the way you want it?
+
+24:34 - Matthew Prisco
+It's what are the fields on data dictionary? That we want. So it needs to get the record ID for that namespace, which honestly we could probably save that lookup. I think we could go straight. If we give a lookup field for the field ID, it could save a step. Because I think right now we're it, we're picking the namespace, then the automation would need to go figure out what the record ID is that's associated, unless it can get it right from the link. I'm not sure what you can get from the link. Then it needs to go straight to the data dictionary table, look for that record that we got from the namespace, whether it's the name of the record or the record ID, it would be the same thing. And then we just need to confirm on the data dictionary table which five fields do we want. For sure, we want the name, the type, the description, the purpose, the context, the options. Some of these are new fields, by the way. I know that they couldn't be configured. So we need to give Afolabi a list of which fields should come back.
+
+26:11 - Dwayne Gibson
+Why don't we just set up a view to come back, Matthew, with those fields?
+
+26:17 - Matthew Prisco
+I don't think that will work from the API. I mean, yeah, it could make it obvious to him which ones, but we can just give him a list. The via URL the last the last parameter is the view that it is selecting from But I think it would still need to be given from It's the and it ends going straight to the API to get the field it's not going to a view exactly The point is the same Which field would we want to give it for the name? I guess the one with the formula, so we would include that. We don't need the link to the data catalog. We don't need the field name because they're included in the formula. Field key, we might give it. Actually, we definitely will give it that. Alternate name, we don't really have any right now, but I think we would give that. And the table we don't need, that's a part of, those are lookup fields, but that's coming from the data catalog.
+
+27:33 - Dwayne Gibson
+Hold on, Matthew, let me slow down so I can write these down. Yeah.
+
+27:40 - Matthew Prisco
+All right, formula name, field key. Right, the main one, the field key, the alternate name, which is going to be mostly blank and definitely blank now.
+
+27:52 - Unidentified Speaker
+All right.
+
+27:53 - Matthew Prisco
+Then we would not need the lookup fields. The next one is getting deleted. The next two are getting deleted. Scroll right, Dwayne. It does need the lookups for base ID, table ID. Why are there two? One that's not for delete. So the base ID, the table ID lookups, give it that. Floppy, this is making sense. Yeah, it does.
+
+28:37 - Afolabi Dave
+Okay.
+
+28:49 - Matthew Prisco
+Base ID, table ID, field ID, those are the big three.
+
+28:58 - Unidentified Speaker
+Field type.
+
+29:00 - Matthew Prisco
+Field order, field type, field description, field purpose, business context, and options, all of that. Hold on, faster than writing this down will be, let me just make a temp. Afalabi, we also need to standardize what the field types are. Do we want to use what air tables call them when we're extracting or do we want to layer into the data definer of renaming so that it uses what we would rather call it I don't I don't have an answer to that yet but it's something I'm aware of man do we want to give just the base ID and a table ID or do we want the name as well it's getting the name in the the formula field.
+
+30:12 - Unidentified Speaker
+Okay.
+
+30:12 - Matthew Prisco
+I would say just give it the IDs for now. Could we add them? Sure, but I don't think for purposes of context that it would matter.
+
+30:26 - Dwayne Gibson
+Input methods? Okay, so you're making a view here.
+
+30:30 - Matthew Prisco
+Just to take the list down. It was easier for me to scroll left right on and actually see them. Okay. So options, yes. Input methods, I think for right now, let's not bother. Because I don't even think we've got it in the data definer. We haven't really done any. I don't think we're ready for that. Okay. I think we skip input method and Read write. Maybe drag those over even.
+
+31:06 - Matthew Prisco
+Get them out of the way.
+
+31:13 - Dwayne Gibson
+Build mappings, yes.
+
+31:15 - Unidentified Speaker
+Actually, no.
+
+31:17 - Unidentified Speaker
+For this, we wouldn't.
+
+31:20 - Matthew Prisco
+That's more the backlink from the other. So definitely, we wouldn't care about those here. Formula, dependencies, code, I just think we're not going to be doing anything with I would put those in the same category like with the other ones. Format, validation. In theory. Put validation and format and formula, put those next to the options because those are either going to be separate fields or all in the options? Oh no, options is literally what are the options.
+
+32:23 - Unidentified Speaker
+So I think, huh.
+
+32:27 - Matthew Prisco
+I think those are ones that we should put in the data Definer, which I think right now the problem with the Data Definer is it has every possible field. We can delete some from there, but we can give it or keep the options and the validation and the formatting, but just give it some better guidance about what to use there.
+
+32:58 - Unidentified Speaker
+Okay.
+
+32:59 - Matthew Prisco
+So I would say yes, include all of those on what to give, but we need to go back and and fine-tune the data definer.
+
+33:09 - Dwayne Gibson
+But not the field mapping source.
+
+33:13 - Matthew Prisco
+Right. Not that. Code dependencies, I don't think we're ready for that.
+
+33:20 - Unidentified Speaker
+Projects and formulas.
+
+33:21 - Matthew Prisco
+Projects that will probably get deleted. In fact, you could delete that right now. That will be sort of like covered by the field mappings. If it has been mapped to a project, that's what it's being used for, and that will create the dependencies as well. Created date, I don't know where to put that. And then the namespaces, Dwayne, that would be if we have a namespace that gets specific data dictionary records. So not the whole table, just a, you know, small package of specific fields. That's where that would get used. Link to form questions is, It's kind of like for field mappings too, but it wouldn't matter here. So, that doesn't matter though. Notes, Read, write. I think we're good. Just the ones we already covered.
+
+34:38 - Unidentified Speaker
+All right.
+
+34:39 - Dwayne Gibson
+Link to namespace. I forgot. Did you say keep or not?
+
+34:43 - Matthew Prisco
+No. Okay.
+
+34:44 - Unidentified Speaker
+All right.
+
+34:45 - Matthew Prisco
+I'll use this view to get this list to Dwayne, if you do want to keep that, you could call it the, you know, whatever view like that would be if we were to export the data dictionary, it would have those fields, it wouldn't have the other random links and stuff.
+
+35:11 - Afolabi Dave
+Okay, and then we could try to do the same thing on the field mappings table.
+
+35:20 - Matthew Prisco
+I think it's a pretty limited number of fields that are even on there. Okay, let me take this note real quick.
+
+35:36 - Dwayne Gibson
+Let's see, we have a total of 22 fields. Okay, well, let's go through.
+
+35:51 - Matthew Prisco
+So it can be linked to either a transformation project or the I don't need to get these off a lot we do you do as he made these for setting up data dictionary.
+
+36:34 - Unidentified Speaker
+For what fields it'll use, okay.
+
+36:38 - Matthew Prisco
+Right. So, in this case, we need the name, the formula.
+
+36:44 - Unidentified Speaker
+All right.
+
+36:45 - Matthew Prisco
+Which we should rename and not just call it name. But we call it field mapping, I guess. Makes sense. And then we don't need to give it the link there because it will be in the formula.
+
+37:31 - Unidentified Speaker
+Field order, yes.
+
+37:33 - Matthew Prisco
+Oh, we don't need either one of these links? Right, and not for what? To pass, we need field order, look up for source fields. We do need the source field. Yeah, we're pretty much going to need all of this. We need the source field, the base ID, table ID, field ID, the target field. I don't think we need that field name, though. Yeah, we don't need that field name. Where are the lookups for the base ID table table ID, field ID for the target.
+
+38:40 - Dwayne Gibson
+There are the only lookups I see on the table. Source, source, source.
+
+38:47 - Matthew Prisco
+Are they hidden?
+
+38:48 - Dwayne Gibson
+No, we only have three hidden fields and it's the ones we just hid. Okay. Field name, transformation, and transfer.
+
+38:59 - Matthew Prisco
+So do we see any of those IDs? Okay, well, let's just need to add them. You know how to do that, Dwayne? What type of fields? Lookup fields for targets. So, add lookup fields. Now, find Bates table and field IDs, not the will deletes. Base ID, you can see it there. You're up there. Nope, go up. Okay. Base ID, table ID, and then field ID.
+
+39:43 - Unidentified Speaker
+Yeah.
+
+39:44 - Unidentified Speaker
+Okay.
+
+39:45 - Matthew Prisco
+So this is saying take from here and put it here, either or, or both. And then we also would include section, sheet, the subsection, the merge field, the column, the cell. Now, this is the question of the formatting rules. Is this enough to give it? We would want to include this, but if there are additional fields that it needs from those tables, we would need to add them as lookup fields here, then we wouldn't need to go to those tables. So I think for now, let's just give it the value from here and not go to the table. And if we need more info, Dwayne, go to add lookup fields.
+
+40:56 - Unidentified Speaker
+Yeah, I think it needs it, though.
+
+40:59 - Matthew Prisco
+I think it does. Yeah, I'm just being lazy, but I don't know. Formatting rule text, maybe? At least add these as lookup fields for now so we can see what's in there. We don't need the link to the rule set. I don't I don't think. If it has RegEx, we're going to need it.
+
+41:23 - Unidentified Speaker
+Technically, we could.
+
+41:25 - Matthew Prisco
+We don't need to link to the rule, the formatting rule. We could go straight to rule sets because those are mutually exclusive. OK, let's see what our options are. We don't need the code for those. Just add that one field then see what the options are for the other one.
+
+41:52 - Dwayne Gibson
+All right, like to rule set the options are for which one? For which one were you on?
+
+42:00 - Matthew Prisco
+Yeah, so you we looked at the options for formatting rules, look at the options for rule sets. This is going to be what are the options that may be useful. Rule name, formatting rules.
+
+42:16 - Dwayne Gibson
+I mean, if we're doing like code generators going to need all of this, right?
+
+42:24 - Unidentified Speaker
+I think so.
+
+42:26 - Unidentified Speaker
+I think so.
+
+42:28 - Matthew Prisco
+Yeah. It's not going to need the app script code Python Output format, it would need the JSON. I think JSON description and pattern, I'm not sure the difference of those. That may be a good enough starting point.
+
+42:49 - Dwayne Gibson
+The actual formatting rules, so like this is months of year, most of that data.
+
+42:56 - Matthew Prisco
+The name is going to be the formatting rule and the rule set because those are sub, categories so first you would say what are our basically our field types this is a date date would be a formatting rule table is on the date then the rule sets would be each type of date or if it's for plan tears what are we going to call those would be the rule sets individually but the category is formatting rule. Formatting rule is almost like field type, but specific to answer choices. I mean, Dwayne, if you want to show a couple of these, I don't think regex we've used fully, but I could imagine these coming in handy. We can always delete them later. The rule name and the formatting rule, we don't, I don't think we need it. I think it's in the record or it would be in the name.
+
+44:15 - Dwayne Gibson
+Another thing to consider is in configuring this inside of N8n, is it easier to have this all on the same table or is it easier just to have it crawl through the tables and get the records? Because it may be easier just to open the record and crawl inside.
+
+44:38 - Matthew Prisco
+I think it's probably easier to have them on the same table. I think it's also useful to have them on the same table if it's relevant. I can review those tables and see what's missing. I think that for now it would get by without them. So maybe let's just try to remember to come back and really revisit those tables to make sure they're as accurate as they can be.
+
+45:17 - Matthew Prisco
+Well, after we get it set up, I'll run test and see Yeah.
+
+45:25 - Dwayne Gibson
+Yeah, just get familiar with how that works.
+
+45:33 - Matthew Prisco
+Because that's super important to the transformation engine. Is valuable for code.
+
+45:46 - Dwayne Gibson
+Okay, so all of this has been geared towards making sure we have the right context type attached when we attach namespaces. Is there anything else we need to cover? That was not working. The PRD was working yesterday. If we're going to have Alpha Lobby look at, we don't know if the PCF, Alpha Lobby, this button was supposed to negate. If we select that button, then we can, the PCF is added as context. Right. If it's not checked, it does not submit. Do you want Is it also going to ignore the PRD or the PCF?
+
+46:44 - Matthew Prisco
+If you did that, so what it would actually be linking is the PCF record is going to get linked to the tool run. The button is going to say whether to include it. So, the workflow would need to be, here's the PCF, but only included if the box is checked. Then the PRD, which is working, it's going to the PCF record to get the URL for the PRD field right there. So I think it's fine. But yeah, we need to give it that extra. Don't give us the PCF just because we linked a PCF. It needs to be get that PCF.
+
+47:30 - Matthew Prisco
+only if we check the box.
+
+47:33 - Dwayne Gibson
+And then I think that means we can delete this context type here, PRD. We could, yeah.
+
+47:43 - Matthew Prisco
+Which would be just deleted off the form, I think. Yeah, I think. Let's see.
+
+47:51 - Dwayne Gibson
+I actually know it's synced to the integration, so it needs to come off. Yeah. So I'll do that.
+
+48:05 - Matthew Prisco
+There's probably something to add to that at this point. Or revise.
+
+48:21 - Dwayne Gibson
+Or revise, yeah.
+
+48:25 - Dwayne Gibson
+Well, right now, so. Actually, no, PCF, I don't think that does anything either from inside the form if we go context types because we're handling the PCF here with this button.
+
+48:43 - Unidentified Speaker
+Right.
+
+48:44 - Dwayne Gibson
+And the checkbox.
+
+48:45 - Unidentified Speaker
+So it doesn't need to be handled.
+
+48:49 - Matthew Prisco
+I'm also not sure that that. Other than selecting the actual, no, so it will grab, what's it gonna do if you pick like meetings? Oh, okay, that's gonna just show you the other questions. So that's not really like critical to the workflow. It's more critical to the form. So if you say, what other context do you want to add is really what we should write on the form. Now, it's going to show you the meeting question. Click that.
+
+49:26 - Dwayne Gibson
+Yeah. So, that works for meetings. It works for AI prompts, documents, sample code, and manual upload. The only thing is manual upload is kind of the same as attachment screenshots.
+
+49:38 - Matthew Prisco
+The same thing, but the two- So, it could be a context type and then it could be, it could all be done the same way. Yeah.
+
+49:49 - Dwayne Gibson
+So, the only two that it doesn't change for our PCF and PRD.
+
+49:55 - Matthew Prisco
+Right, so then we should write additional context types instead of context types or something. You can call it additional context types because I already clearly got PCF Now, the form is not going to fully explain the difference between these additional context types versus the namespaces. They're all types of context, but they're just set up differently.
+
+50:44 - Unidentified Speaker
+Yes.
+
+50:45 - Matthew Prisco
+So I think it's fine since our team is only using it internally. Here's the question of do we want to consolidate transformation projects and output formats and call it field mappings?
+
+51:03 - Dwayne Gibson
+So that would need to be done here. And yeah, so that would be done here. The real work that needs to be done is how do we use this to filter this button?
+
+51:22 - Unidentified Speaker
+Right.
+
+51:23 - Matthew Prisco
+Well, I think it would be go to namespaces, the question, the second one, and put see if there's what is our advanced filtering logic, edit records, advanced, somewhere in there. So that's about the question. So we're not That wouldn't be this. I would check. That's to show the question. We need to show which records to display. So go to a different configuration. Now, always show namespace types. Okay. Well, I guess it could be show when you select a namespace.
+
+52:12 - Unidentified Speaker
+Okay.
+
+52:12 - Matthew Prisco
+When namespace type is not empty. Not empty.
+
+52:16 - Unidentified Speaker
+Okay.
+
+52:17 - Matthew Prisco
+But now really we need to go to the next question in the settings for namespaces. This is where it needs the filtering. I think, which one are you in that? I'm in it. I'm in the second one. Oh, it's great out just because it's not shown. Create records edit records Yeah, I Don't know let's see what those have allow editing records no no Advanced I guess feels to show Fields to show um So we need some kind of if That's talking about the fields. We need to look at how to filter for records.
+
+53:19 - Matthew Prisco
+Only show new selections.
+
+53:22 - Matthew Prisco
+Filters. Yeah. Filter records, yeah. Add condition if it matches namespace type. Hopefully that allows us to do that. That dynamically. If namespace type, this looks different than the other way you match. It would need to match what's above. So we need to select the question. Yeah, that's what I'm saying.
+
+53:50 - Dwayne Gibson
+We need to find a way to say if this brand matches.
+
+53:56 - Matthew Prisco
+Yeah, I don't know if it'll let us match I can dig into it.
+
+54:05 - Dwayne Gibson
+I can see if there's a way to do that. Validation, minimum selection, maximum selection.
+
+54:15 - Matthew Prisco
+Limit options to show. Yeah. See if it lets us do that based on what was previous. Does it let us do this?
+
+54:30 - Unidentified Speaker
+This is the first one.
+
+54:35 - Matthew Prisco
+So this is the selection of names going to go back to the namespaces one.
+
+54:48 - Dwayne Gibson
+Validation. No. Require minimum records advanced. Fields to show. Search by filters and only show new selections.
+
+55:01 - Matthew Prisco
+I think it would have to be the filter, but it doesn't seem like it's letting us pick the filter based on a previous question.
+
+55:13 - Dwayne Gibson
+Yeah. Wait, namespace type contains.
+
+55:15 - Matthew Prisco
+See if it lets us pick something dynamic or I think there was. There's kind of a way to change, like, are these the user selections? Could be namespace type is or contains. And this would need to be a dynamic field. And there's a way to switch from, yeah, wait, these are questions. Let's pick, look for namespace type.
+
+55:56 - Unidentified Speaker
+Yeah.
+
+55:56 - Matthew Prisco
+Namespace type. Click on it. Namespace type. I'm confused. No, the yellow one that was the user. You were in the right spot.
+
+56:17 - Dwayne Gibson
+the wrong button. Hold on. Let me go back.
+
+56:22 - Dwayne Gibson
+All right.
+
+56:24 - Dwayne Gibson
+Namespace.
+
+56:24 - Dwayne Gibson
+Where were we?
+
+56:26 - Unidentified Speaker
+Filter.
+
+56:27 - Unidentified Speaker
+Yeah.
+
+56:27 - Unidentified Speaker
+Namespace type.
+
+56:28 - Matthew Prisco
+Right now it says Airtable field or which one are you working on?
+
+56:36 - Dwayne Gibson
+I'm working on the second one. The second namespace. Okay.
+
+56:42 - Unidentified Speaker
+Namespace type.
+
+56:43 - Matthew Prisco
+Click on namespace type. Doesn't let you click? Yeah. What's going on? Okay.
+
+56:53 - Dwayne Gibson
+This field expects strings. Try using a fill out drop down or multiple choice.
+
+57:04 - Matthew Prisco
+I'm tempted to just delete Yeah, let's just start over. Namespace type. Maybe it should be contains or is contained. I think contains, so it can be one of the options. And then just actually click the one that you were hovering on and hit done and see if it works. Yeah. It wants to work, but yeah, it still has the, uh, what is it saying?
+
+57:52 - Matthew Prisco
+Expect strings.
+
+57:54 - Matthew Prisco
+Try using fill out drop down choice.
+
+57:58 - Unidentified Speaker
+What kind of field is, is this now?
+
+58:02 - Matthew Prisco
+I've, it looks like a, It looks like a multiple choice or multiple. Oh, this is linking, adding. This is, it's a record picker. No, but it's record picker because it's going to actually link that record, which the namespace we need it to, but we would just need it to filter before it even presents that as an option to pick.
+
+58:38 - Dwayne Gibson
+So we need to start over here with this question.
+
+58:42 - Matthew Prisco
+No, I just think it's not going to be easy and just pick the namespace. It's just not going to filter. Or you can leave it and just know that it's not actually going to do anything. That's fine.
+
+59:01 - Unidentified Speaker
+Okay.
+
+59:03 - Matthew Prisco
+On additional instructions, I would put in user prompt slash additional instructions. Maybe give it a space on either side. Same thing maybe for attachment screenshots. A little easier to Read.
+
+59:37 - Unidentified Speaker
+Yeah.
+
+59:37 - Matthew Prisco
+Or attachments screenshots. All right, Google Data Definer, hidden PCF.
+
+59:46 - Dwayne Gibson
+We already worked on that. AlphaLobby is going to work on. This button PRD button is working We already updated Wait, why is this still going still selecting additional?
+
+1:00:07 - Dwayne Gibson
+Type PRD in I think it just needs to Update rash.
+
+1:00:13 - Dwayne Gibson
+Yeah, okay So that'll update then we have These are all good. Sample code is good. Attachments. Dwayne, what we could consider is, let's just look real quick.
+
+1:00:29 - Matthew Prisco
+How is, I know why. It's because they're their own field. So, I was trying to think about how it's working for the meetings and all those to filter, but it's because they're in different fields instead of namespaces where everything's in one. We could break this up to where, how could we do it?
+
+1:00:56 - Dwayne Gibson
+So instead of having all of these options inside of namespaces, these could each be their own field and we could select from the field and then it only shows.
+
+1:01:10 - Matthew Prisco
+I think let's get it working and then we can deal with it. Okay.
+
+1:01:20 - Dwayne Gibson
+I think, uh, I think the form's in good shape and the only question we have are these, but like you said, we can handle that later.
+
+1:01:34 - Matthew Prisco
+Um, Dwayne just published the form. So it gets the changes that we made. It has attachments twice to the attachments and screenshots. Are those actually two different fields?
+
+1:01:50 - Dwayne Gibson
+Yeah. So this is going, you want to see, to the integration where they're mapped to? Yeah. All right. Looks like maybe not mapped anywhere.
+
+1:02:04 - Matthew Prisco
+Either of them or delete the one that isn't. Attachments. The slash one is the one to keep, but maybe drag that What do you think the logic was for the show hide? Oh, for the context type. Do you want to add attachments or screenshots? Or do you want to just leave it at the bottom of the form there?
+
+1:02:34 - Dwayne Gibson
+So this, this column is air table. This column is fill out.
+
+1:02:39 - Dwayne Gibson
+So right.
+
+1:02:40 - Dwayne Gibson
+This, the air table exists. We know this attachment screenshot.
+
+1:02:45 - Matthew Prisco
+Right, so it's using the last one and the middle one doesn't seem like it's being used. Yep, exactly. All right, so just delete that one and then we can move the other one around if we want to. We just don't want it to be someone uploads something there and it goes nowhere. Yeah, delete that. And then we can decide for screenshots do we want to move it around. Okay, republish it, and then I think we're done here.
+
+1:03:20 - Unidentified Speaker
+All good.
+
+1:03:21 - Matthew Prisco
+Can we look, Dwayne, just real quick at the namespaces table? I just want to show you how to configure namespaces. So, it's got the formula, which is taking the namespace and then the, I think it creates the rest of it. Go to the formula for that. It's creating the name. We can't see the whole screen. Oh, no, nevermind, we can. Yeah, it's grabbing the concatenation based on the type. So, actually, I have it set up to just grab all of those, and if it's a link, then it'll add. It. That was easier than saying if this, if that. So, the point being is it takes the context type or the namespace type and then whatever is the title for the linked field. So, in practice, what do these end up looking like,
+
+1:04:26 - Unidentified Speaker
+Data catalog.
+
+1:04:27 - Dwayne Gibson
+We can make a test one really quick.
+
+1:04:31 - Matthew Prisco
+So, we only have six this table is going to get much bigger because it's every data catalog record, every transformation project, every output format, every software form, every N8n workflow, every fill out form, and we need to configure all of these so that once each context type is working, it will actually be able to gather it obviously you'll only be able to select the ones that are in here so if you're on a form and you try to select something it's not there it needs to be added here right yeah so for each of the context types you're gonna link to a certain field so it's really not that bad if it's type data catalog find the table on the data catalog if it's type software portal, find the softer portal. It's going to get you everything for the whole portal. It's not as granular as get me a page from a portal. Well, but that that second step has to already exist as well.
+
+1:05:43 - Dwayne Gibson
+The softer portal needs to be. Right.
+
+1:05:45 - Matthew Prisco
+Well, that'll be a question for off-lobby, but first I want to make sure that you understand how to set these up. For any that are missing. So first is to get every table onto data catalog, then set it up as a namespace. And we'd have to think about how can we find the missing ones.
+
+1:06:12 - Dwayne Gibson
+So the end goal is to be able to grab the records that are on these tables. And add them as context in the MCP tools. The way we do that is the namespaces table. And we do that by creating a namespace, data catalog, and then selecting the data catalog table, giving us this name, which would be namespace that we select.
+
+1:06:46 - Matthew Prisco
+One idea would and this would be a question for Alfa Lobby, is if we put the record ID as a lookup field for every context type or for every namespace type, if it has the record, or is it enough to just go based on the name, or does it matter? So, Alfa Lobby, if on this table, if it already has, on the namespace table what the record is called, can you just tell it, go, I guess it needs to come here first anyway, or it needs to be the linked field it would need to give the name. Because it needs to be able to go to a certain, to the destination, and it needs to know customer success benefits. Benefits, not data catalog customer success benefits, if it's going to use the name, because the name on that table is going to be the shortened form. Or we could put the record ID as a lookup and then save from having to go to those different tables.
+
+1:08:03 - Afolabi Dave
+Yeah, I think let's have the record ID as a lookup, that's actually faster and easier.
+
+1:08:11 - Matthew Prisco
+But we would have to put it for each of the context types. We need to add it to the table that it's coming from so that we can bring it in here. Then we would need to make probably a formula field that puts the record ID. For all of these so far, it's only one record. Her namespace. I could imagine where a namespace would have multiple components.
+
+1:08:45 - Dwayne Gibson
+That was my original understanding was a namespace covered a group of things. It's designed to.
+
+1:08:54 - Matthew Prisco
+Well, Afalabi, how is it doing it now? Is it working for a software portal? That may be our best solution is just to keep it if it's working and not it actually works for a software model.
+
+1:09:13 - Afolabi Dave
+Um, as long as the, what do you call it? The data is on a data dictionary. Once you get this data, we use it to search on the next table. Then from there we now get the records linked to that particular table. Yeah.
+
+1:09:29 - Matthew Prisco
+And then we would have to go through the same exercise and say for us fill out portal what fields do we want from the portal table what fields do we want from the page table what fields do we want from the block table is how the namespace needs to be set up or the the gather or the get for that namespace it let me make sure I'm understanding so right now you're saying if I was to go to this form, select software portal as a namespace, and then select...
+
+1:10:06 - Dwayne Gibson
+It's not going to filter, but yeah, find one that's a software portal.
+
+1:10:11 - Matthew Prisco
+Yeah, let's say I selected this portal here.
+
+1:10:14 - Dwayne Gibson
+Why are you checking the box there? Just so that it's highlighted which record I'm talking about. Okay. Because the record name is what this form is selecting. Right.
+
+1:10:26 - Matthew Prisco
+Right. Yeah. So, if I select that record name, the MC if you select it on the form.
+
+1:10:32 - Dwayne Gibson
+Yeah, I'm just saying as an example, it's going to come to this record, come to this field, open this field, have access to all of these records, right? It's going to go to those tables. But that's how it's going to find these tables.
+
+1:10:49 - Matthew Prisco
+It's going to start at no, it's going to get the from, for the portal and then go to the associated table and look for the records that are linked to that.
+
+1:11:04 - Unidentified Speaker
+Okay.
+
+1:11:04 - Matthew Prisco
+And it's going to do that on, it's going to go to the software portal page and actually get fields from that record. Then go to the next one and look for ones that are linked to filter for that. And I believe we have the blocks also has a look up to the portal, so it can be filtered on the portal level too. So this would just be testing, is can you get softer, N8N, fill out, and then we'll do the same So we'll test. Sorry, this is taking so long off lobby, but it's important. No, it's fine.
+
+1:12:04 - Afolabi Dave
+He's fine.
+
+1:12:06 - Dwayne Gibson
+So it's recording the name of the run immediately. Looks like we might have hit another error.
+
+1:12:30 - Matthew Prisco
+Well, what it might be at this point is Afolabi is going to review it all anyway, so maybe he can see which of those ones are working and where it's failing. Dwayne, what we would do is the same What fields do we want from the portal table? What fields do we want from the page table? And what fields do we want from the blocks table? And then on N8n, what fields do we want from the workflow table? What fields do we want from the node table? And now there's the prompt side too. So if this is the reason to link the prompt to the node is that the prompt can be a lookup field on the node. Let's make sure that's already done.
+
+1:13:26 - Dwayne Gibson
+I might have already done it. But how do we ask for different blocks? How are we doing that? We're not.
+
+1:13:34 - Matthew Prisco
+You would only select the portal right now. Okay. If you pick a portal, you're getting it all.
+
+1:13:40 - Dwayne Gibson
+Got it.
+
+1:13:41 - Dwayne Gibson
+Okay. You want to check what, Matthew?
+
+1:13:44 - Matthew Prisco
+on the N8N node table. So, the prompt is linked, which is going to be only one or two examples here, really just what I asked Alicia yesterday. There we go. Okay. So, those are linked. Now, look at that prompt text. Lookup. That's going to give us every prompt. So when we look at what fields we want, we would include the prompt there. So that's going to give us all the prompts without having to go to the prompt table. But we need to now do more documentation of N8N. This isn't just adding the namespaces. We don't actually have the documentation yet. So, I think what the next step for Alicia should be, he ran the renamer for the nodes, but I don't think he put them into N8N, just from looking at the screens you've been sharing.
+
+1:14:58 - Dwayne Gibson
+So, you want to grab the fresh and have Elisha rename.
+
+1:15:04 - Matthew Prisco
+It wouldn't involve the JSON, it'd be go into N8N and rename the nodes using the suggestions from the rename. Each of these nodes has a name and we might give it to the LLM. It already did that, so he would need to go in, hopefully it doesn't mess anything up, And rename them each of these nodes is in the workflow. We've renamed it an air table It needs to match the name that's in here.
+
+1:15:39 - Dwayne Gibson
+That was kind of the whole point okay.
+
+1:15:42 - Matthew Prisco
+I see what you're saying so these 73 nodes right if those are the 73 nodes minus whatever we said we delete But renaming it is so that we can make sense of of the workflow. Split rules, get rule set.
+
+1:15:58 - Dwayne Gibson
+These sound like the names that the LLM gave it. These don't sound like the names that are in there. That's my point.
+
+1:16:08 - Matthew Prisco
+I thought I told Alicia to go in and to change them and I thought he was working on it, but apparently not.
+
+1:16:21 - Dwayne Gibson
+GetRuleSet, let's see. Nope, no name called GetRuleSet. Okay, well. Okay. I can handle that.
+
+1:16:32 - Matthew Prisco
+Like I said, I don't want to distract off a lobby with boring stuff like that, but Yep.
+
+1:16:45 - Matthew Prisco
+Okay, I think that kind of covers it for now.
+
+1:16:50 - Matthew Prisco
+Our Flobby goal is just to sort of get first the field mappings and the data dictionary types just working. Seems like the other context is already working. Do the little tweak to uncheck or to not gather a PCF unless it's checked. And then to go through those additional namespace types for fill out and for softer and n8n and just see is it working at all. And then I think we will need to fine tune which fields it's gathering. Okay, no problem.
+
+1:17:32 - Afolabi Dave
+Okay, I will get on that now. Yeah.
+
+1:17:35 - Matthew Prisco
+All right.
+
+1:17:36 - Matthew Prisco
+Well, that's gonna, it's gonna keep off lobby busy. And then after that Flobby, we can meet again about the quoting engine. Actually, we got the data dictionary automation. How close do you think that is? It seemed like you got pretty close.
+
+1:17:55 - Afolabi Dave
+Okay. What do you call it?
+
+1:17:58 - Matthew Prisco
+I think we extract up. Right. Extract and then the data definer prompt to write the data dictionary record.
+
+1:18:06 - Afolabi Dave
+Yeah, I actually got pretty close, if not but I just need to make sure everything is perfect basically it writes what it does now is it checks based on the field id what we have from the data catalog what we have from data section then it goes to let's say masters project teams it goes to check all the fields we have on masters project teams from airtable yeah from airtable you know we have masters project as a big then we now have team as a table on the base. But on data catalog, we have a master's project team data catalog. So it compares the field IDs of the field we have on data strategy and the field we have on master's project teams table. Then if we have those specific fields, for the fields we have, it updates the fields based on the data defined up front. But for the fields we do not have, it just creates a new record.
+
+1:19:14 - Matthew Prisco
+And we would also want it to delete a record if it's no longer on the schema. So if you don't find it in Airtable, it got deleted, probably we would delete that record too. Obviously, we need to be careful about what we delete, but I think that would work, that it's a sync first, and then decide whether to update it. I'm comfortable with it writing stuff, giving us the basic description, context, whatever. It's not going to be perfect, but at least giving us something so that we can start using these tools, then we'll start to become more careful about which records it updates and which ones it doesn't, and even which fields on a record it updates.
+
+1:20:02 - Dwayne Gibson
+Okay. Okay, no problem Okay, but yeah, let's do this MCP engine stuff first and then we can complete the data dictionary and then we'll get back to quoting engine Can you Can you populate these two columns with run status Instead of having to come here for error or success Can we just block you here?
+
+1:20:30 - Unidentified Speaker
+Yeah, no problem.
+
+1:20:31 - Dwayne Gibson
+Would the error be so that we can speed up testing?
+
+1:20:35 - Unidentified Speaker
+I would do that.
+
+1:20:37 - Afolabi Dave
+It's basically the same thing I did for the QA tracker. So I would even let you know the exact node where it adds the error. Does that work, Dwayne?
+
+1:20:48 - Dwayne Gibson
+Perfect.
+
+1:20:49 - Dwayne Gibson
+All right, no problem.
+
+1:20:50 - Afolabi Dave
+All right, thank you very much. Is there any other thing you want to add, Matthew?
+
+1:20:56 - Unidentified Speaker
+No.
+
+1:20:57 - Afolabi Dave
+All right, no problem. Get on it right now and I'll let you know. Dwayne, could you send me the link to the meeting when you're done as well?
+
+1:21:06 - Dwayne Gibson
+I'll send you the link to the meeting and I'll send you the list of fields from those two tables.
+
+1:21:13 - Afolabi Dave
+All right, no problem. Thank you very much, Dwayne.
+
+1:21:16 - Unidentified Speaker
+Have a wonderful day.
+
+1:21:17 - Unidentified Speaker
+You're welcome.
+
+1:21:18 - Unidentified Speaker
+Bye.
+
+1:21:18 - Unidentified Speaker
+All right, bye.
+
+1:25:23 - Unidentified Speaker
+Thank you.

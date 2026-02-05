@@ -1,0 +1,80 @@
+Hamna - Docker-MCP server setup
+Thu, Oct 9, 2025
+
+0:01 - Matthew Prisco
+because it's easier to load into Chad GPT that way. But we also have it in an air table. And we'll have it review, you know, what are the standardization that we might need across maybe the chain or the, the, the tool level in particular, or nodes that could be consolidated or not. There's probably, you know, some discretion or some options that we have there. Usually I try to combine if we can, just to have less nodes to, you know, have floating around. But we'll see what ChatGPT thinks. So it'll be definitely an interesting exercise. So you guys can do the same thing once you have all three drafts loaded up and ask whatever questions you want. I'll definitely do that from my end. And also, I think now the question is going to be as we get ready for coding, how much to hard code and how much to pull from Airtable as configs. In the N8n we've pulled almost everything as configs. The data dictionary, the IO format, or not the data dictionary, the field mappings that use the data dictionary. So what we'll probably want to come up with is sort of a guideline that all three of you can use to try to code your workflow is what parts are going to come dynamic from Airtable. And so we can also have then standardization on the code side. And then when you draft the code, you can test it locally, but we'll also give the code from all three and come up with the best practices to standardize across the code versions as well. Before we go to deploy them in, you know, on our DigitalOcean account. That make sense?
+
+2:33 - Hamna Rafi
+Yeah, that makes sense. For deploying, we need to test it locally, all three workflows.
+
+2:40 - Matthew Prisco
+Right, test it, get it working, and then we'll also iterate by doing the same thing like we're comparing the drafts now, we'll also compare the code. Another option would be to say, hey, who wants to code all three of them instead of having three people code? I don't know if we would do that. I think probably, you know, code yours. But then definitely when we have, you know, some code, we'll compare the three. And then kind of I noticed that those, you know, those videos hit yesterday. The bigger one, I guess, is the Docker MCP catalog. I've never used any of this stuff. I'm not a developer, but I could imagine that setting up an MCP individually is, you know, not that hard, but it's extra steps. And now this makes that super easy. To connect MCPs to your own LLM, but I'm looking at it also as how can we connect those to our code team at Betafits, we have a GPT or chat GPT account. So if we want to connect that account to certain MCPs, Regardless of whether we're using them with the rest of the tools in the ecosystem, what would it take to get that set up? And could we do that with Docker? Go ahead.
+
+4:26 - Hamna Rafi
+So I've completed the comprehensive analysis of both Docker and CP catalog videos. And basically the Docker one very interesting it basically allows you to connect 500 plus apps externally and it includes github, slack, youtube and within a few clicks like it would take I think less than or like 10 to set up the ncp with the jgpt in the video you used claude But we can also use a chat. Good.
+
+5:10 - Matthew Prisco
+Well, I think what what I can do, and Dwayne from our team is also on on the other channel, I can have him get you set up with access to log on as code team at beta fits, so that whatever you set up, you can kind of link it to that account. And we can decide what what MCPS are interesting to us.
+
+5:34 - Hamna Rafi
+So But I'm not sure what MCP tool we should, what tool we should connect. Like, for example, we can connect GitHub, we can connect Slack, we can connect YouTube. There are 500 options in the, in the Docker MCP toolkit.
+
+5:54 - Matthew Prisco
+I'll think about what the first one is, but I guess once we have set up one, then it's going to be easy to turn other on or off. So to me, it's not that important which one or what we're going to use it for, but just to establish that process for connecting. And the meeting that I just had with Ali was also about MCP servers, but how we can then from the main MCP tool sort of brain, the context engine, instead of outputting only to the other nodes or to Airtable, it would also be able to gather context to insert into Chad GPT. So we'll make our own MCP server. Each of the tools or some of the tools can be called through you know, through the connection between chat GPT and the MCP server. And in particular, it would be two way. So think about if you're asking for context, I need this data dictionary for these tables and this workflow, or it could just decide you need it. And it goes into chat GPT, not just the work on it yourself version. This is the bring the context in, work on it inside of ChatGPT or Claude or whatever, and then when you're done, now that whole thread of conversation that includes the final workflow can be sent back to make it, you know, then go to the individual nodes that have the output formats to validate and then write it into So it'd be like human in the loop, but still be able to put it back into, to gather context, and then also to send the final draft back to Airtable.
+
+8:09 - Hamna Rafi
+Yeah, that makes sense to me.
+
+8:12 - Matthew Prisco
+But like I said, I think the first step is be able to log in with, we use Gmail for everything, so it'd just be, You know, you're logged into that. You can stay logged in if you want, but at least to go in and try to set that up or see what it would take to connect that chat GPT account. And then, yeah, I mean, we could look at there's context seven is one that's interesting. I think that has a lot of the and documentation of Python frameworks and N8n. And definitely the MCP tools will use some of those, like the N8n Imaginator would use an MCP server for N8n. But it also needs to have our best practices, because especially for some of the ones that we're using for orchestration for the business, side of this. We've built our own workflows and sub-workflows and it needs to, you know, be in the same style as those. So I think we'll even be able to combine external MCPs but then also with our guidance or the structure of our own best practices documents. So there's some documents out there that are specific to different tools. I want to start testing some of the easy to connect MCP servers. So, you know, just wanted to introduce that.
+
+9:55 - Hamna Rafi
+Easy to connect MCP servers of the docker.
+
+9:59 - Matthew Prisco
+To docker. It would be the easiest ones is if it's on that list.
+
+10:03 - Hamna Rafi
+I can demonstrate one to you right now.
+
+10:08 - Unidentified Speaker
+Okay.
+
+10:10 - Hamna Rafi
+If we can screen share.
+
+10:12 - Matthew Prisco
+I just downloaded Docker today. I didn't get to play around with it, but I saw from the video there, you know, their demo.
+
+10:40 - Hamna Rafi
+Okay, can you see my screen?
+
+10:42 - Unidentified Speaker
+Yeah, it's coming up.
+
+10:45 - Hamna Rafi
+Okay, so we can just come into the MCP toolkit and add MCP server. And for example, we use YouTube transcript. Okay, and this MCP tool have three tools basically so and we can docker gives the I need to sign in to use that Gordon just a minute that's their MCP yeah that's basically an LLM tool which we can use like instead of connecting our own cloud or with any other external tool we can use it to test like whether it's connected or not. Let me just quickly login.
+
+12:05 - Unidentified Speaker
+Okay.
+
+12:31 - Unidentified Speaker
+I really appreciate it.
+
+13:18 - Hamna Rafi
+you Okay.
+
+15:34 - Unidentified Speaker
+You got it.
+
+15:35 - Hamna Rafi
+Oh, yeah. Okay. It was just a login. Okay. Enable Gordon. From the settings.
+
+16:19 - Hamna Rafi
+Okay, so, yeah. So if I. This is exactly what the video was about. Thank you so much. Hello. Hello. Well, I think so the things that I'm planning at this point are how do we use the what tools inside of the or toolbox, is that where we would want to build our own MCP?
+
+18:36 - Matthew Prisco
+So what are our options for kind of the MCP server side of, you know, we're going to have our tools, how do we plan, even in Airtable, which of these should be tools that are exposed in our MCP? You know what I mean?
+
+19:00 - Hamna Rafi
+Thank you.

@@ -1,0 +1,94 @@
+{
+  "tools": {
+    "fetch_pcf_table": {
+      "name": "fetch_pcf_table",
+      "description": "Fetches all PCF Parser records from Airtable and automatically expands linked records (projects, features, components, team members, tools, meetings). Returns a list of PCF dictionaries with all related data.",
+      "return_description": "List of PCF records with expanded linked data"
+    },
+    "map_relevant_pcfs": {
+      "name": "map_relevant_pcfs",
+      "description": "Find the most relevant PCF records for a given transcript using semantic search (embeddings), BM25 keyword matching, and LLM-based re-ranking. Returns scored and ranked PCF matches with relevance scores. Use filter_current=True to prioritize active PCFs.",
+      "return_description": "List of relevant PCF records sorted by relevance score (0.0-1.0)"
+    },
+    "create_pcf_table_embeddings": {
+      "name": "create_pcf_table_embeddings",
+      "description": "Create embeddings and BM25 index from PCF records for semantic and keyword-based search. Must be called before map_relevant_pcfs. Builds an in-memory vector store and BM25 index from PCF summaries and names.",
+      "return_description": "Confirmation message with embedding and index statistics"
+    },
+    "summarize_pcf_meeting": {
+      "name": "summarize_pcf_meeting",
+      "description": "Summarize the parts of a meeting transcript that are relevant to a specific PCF (Project/Component/Feature). Analyzes the transcript in context of the PCF's purpose, type, and summary. Returns structured summary with relevance score, action items, and key points.",
+      "return_description": "Dictionary with pcf_id, meeting_id, summary (bullet points), relevance_score (0-1), action_items (array), and timestamp"
+    },
+    "summarize_text": {
+      "name": "summarize_text",
+      "description": "Simple text summarization without PCF context. Legacy function for general-purpose text summarization.",
+      "return_description": "Summarized text string"
+    },
+    "create_pcf_parser_record": {
+      "name": "create_pcf_parser_record",
+      "description": "Creates a new record in the PCF Parser Airtable table using field IDs. Stores meeting summaries, analysis results, and links to PCFs and meetings. If date is not provided, defaults to today's date in ISO format (YYYY-MM-DD).",
+      "return_description": "Created Airtable record with id, createdTime, and fields"
+    },
+    "store_to_rag": {
+      "name": "store_to_rag",
+      "description": "Store text documents into the Supabase RAG (Retrieval-Augmented Generation) system for semantic search and retrieval. Optionally include metadata for each document (e.g., source, date, type).",
+      "return_description": "Confirmation message with number of documents stored"
+    },
+    "query_rag": {
+      "name": "query_rag",
+      "description": "Query the Supabase RAG system using semantic search. Returns the top-k most relevant documents based on embedding similarity. Optionally filter by metadata (e.g., source, date range).",
+      "return_description": "List of retrieved documents with similarity scores and metadata"
+    },
+    "add_episodes_to_graphiti": {
+      "name": "add_episodes_to_graphiti",
+      "description": "Add episodes (events/meetings/updates) to the Graphiti knowledge graph. Each episode represents a discrete event with content organized by core, domain, project, component, and feature. Episodes are connected to entities in the knowledge graph.",
+      "return_description": "List of created episode IDs or error messages"
+    },
+    "save_log": {
+      "name": "save_log",
+      "description": "Saves a log message to the Supabase database for workflow tracking and debugging. Stores log information with origin/source identifier and timestamp.",
+      "return_description": "Confirmation message with saved log data"
+    },
+    "pcf_parser_workflow": {
+      "name": "pcf_parser_workflow",
+      "description": "Orchestrates the complete PCF Parser MVP workflow: 1) Fetch all PCF records from Airtable, 2) Map relevant PCFs to the meeting transcript using semantic search and LLM re-ranking, 3) Summarize meeting content for each matched PCF, 4) Create PCF Parser records in Airtable, 5) Store summaries to RAG and Graphiti knowledge graph. Returns created records and storage results.",
+      "return_description": "Dictionary with created_parser_records, mapped_pcfs, rag_result, and graphiti_result"
+    }
+  },
+  "prompts": {
+    "extract_key_topics": {
+      "template": "Analyze this meeting transcript and extract the key information for searching a project database:\n\nTRANSCRIPT:\n{transcript}\n\nTASK: Extract and summarize:\n1. Main topics discussed (projects, features, components, tools)\n2. Key action items or deliverables\n3. Technologies or tools mentioned\n4. Team members or roles discussed\n5. Any specific project/feature/component names mentioned\n\nFormat your response as a concise summary (2-4 sentences) focusing on the main subjects and keywords that would help find related project records.\n\nCONCISE SUMMARY:",
+      "description": "Extract key topics from meeting transcript for focused semantic search",
+      "variables": [
+        "transcript"
+      ]
+    },
+    "rerank_with_llm": {
+      "template": "You are an expert at evaluating project/component/feature relevance in a software development context.\n\nUSER QUERY SUMMARY:\n{query_summary}\n\nCANDIDATES TO EVALUATE:\n{candidate_texts}\n\nSCORING GUIDELINES - Assign a relevance score from 0.0 to 1.0:\n\n**CRITICAL: Focus on WHAT the candidate IS ABOUT, not just tools it mentions.**\n\n**HIGH RELEVANCE (0.8-1.0):**\n- The candidate's NAME or PRIMARY PURPOSE directly matches the query's main topic\n- The candidate IS the subject being discussed (e.g., query talks about \"Transformation Engine\" features → candidate IS \"Transformation Engine\")\n- Direct conceptual/semantic alignment between query intent and candidate's core objective\n- If query discusses a specific project/component/feature BY NAME, that exact record should score 0.95-1.0\n\n**MODERATE RELEVANCE (0.5-0.7):**\n- Related functionality or complementary features\n- Same domain/category but different specific purpose\n- Mentions similar tools but serves different objective\n- Supporting or adjacent functionality\n\n**LOW RELEVANCE (0.0-0.4):**\n- Different domain/purpose entirely\n- Just happens to mention same tools but unrelated purpose\n- Tangential connection only\n- No semantic alignment with query intent\n\n**EXAMPLES:**\n- Query: \"Meeting about Transformation Engine input/output processes\"\n  - Transformation Engine record → 0.95+ (IT'S THE SUBJECT)\n  - Some other feature that uses Airtable → 0.3-0.5 (just mentions a tool, not the topic)\n\n- Query: \"Discussion of Softr Block Drafter PRD\"\n  - Softr Draftr record → 0.95+ (IT'S THE SUBJECT)\n  - Other automation tools → 0.3-0.5 (related but not the topic)\n\nIMPORTANT:\n- Prioritize: What is the query ABOUT? (subject/topic) > What tools does it mention? (incidental)\n- Be strict: Only 0.8+ if candidate IS the main subject or directly fulfills the query's intent\n- Don't over-score just because tools/keywords match\n\nReturn ONLY a JSON array (no markdown, no explanation):\n[\n  {{\"id\": \"recXXX\", \"score\": 0.95, \"reason\": \"This IS the Transformation Engine discussed in query\"}},\n  {{\"id\": \"recYYY\", \"score\": 0.45, \"reason\": \"Uses Airtable but different purpose from query topic\"}}\n]\n\nSort by score descending. Include all candidates.\n\nJSON OUTPUT:",
+      "description": "LLM-based re-ranking of search results for accurate relevance assessment",
+      "variables": [
+        "query_summary",
+        "candidate_texts"
+      ]
+    },
+    "summarize_text": {
+      "template": "Summarize the following text:\n\n{text}\n\nSummary:",
+      "description": "Simple text summarization without context",
+      "variables": [
+        "text"
+      ]
+    },
+    "summarize_pcf_meeting": {
+      "template": "You are analyzing a meeting transcript in the context of a specific PCF (Project/Component/Feature) record.\n\nInput:\n- Transcript: \"\"\"{meeting_transcript}\"\"\"\n- Matched PCF: \n{pcf_context}\n\nTask:\nGenerate a comprehensive PCF context document that captures the instructions, constraints, and clarifications from this meeting that should guide the project. This document will serve as a reference for understanding how to implement and execute this PCF.\n\nOutput your answer in the following JSON structure (respond ONLY with valid JSON, no markdown):\n\n{{\n  \"pcf_id\": \"{pcf_id}\",\n  \"meeting_id\": \"{meeting_id}\",\n  \"relevance_score\": 0.85,\n  \"action_items\": [\"action 1\", \"action 2\"],\n  \"timestamp\": \"{timestamp}\",\n  \"summary\": \"# Instructions\\n- [First instruction from the meeting about how to implement this]\\n- [Second instruction]\\n- [Third instruction]\\n\\n# Constraints\\n- [First constraint or limitation discussed]\\n- [Second constraint]\\n- [Third constraint]\\n\\n# Clarifications\\n- [First clarification about scope, approach, or requirements]\\n- [Second clarification]\\n- [Third clarification]\\n\\n# Key Decisions\\n- [Important decision made]\\n- [Another decision]\\n\\n# Action Items\\n- [Specific next step]\\n- [Another action item]\"\n}}\n\nIMPORTANT GUIDELINES:\n- The \"summary\" field must be a STRING with newlines (\\n), section headers (# ), and bullet points (- ), NOT an array\n- Organize content into clear sections: Instructions, Constraints, Clarifications, Key Decisions, Action Items\n- Each section should have multiple bullet points with specific, actionable details\n- Focus on capturing enough content to guide project implementation\n- Extract the HOW (instructions), the LIMITS (constraints), and the WHAT (clarifications) from the discussion\n- Each bullet point should be detailed and informative, not just a brief mention\n- The \"action_items\" field should be an ARRAY of strings\n- The \"relevance_score\" must be a NUMBER between 0 and 1\n- If a section has no relevant content, you can omit it or include a note like \"- None discussed in this meeting\"\n\nExample of good summary format:\n\"# Instructions\\n- Use LangGraph for workflow orchestration with separate nodes for each step\\n- Store all data in Supabase with proper field mappings\\n- Implement error handling at each node with fallback mechanisms\\n\\n# Constraints\\n- Must work with existing Airtable schema without modifications\\n- Cannot modify PCF table structure until reorganization is approved\\n- Limited to current PCF records only, no new PCF creation\\n\\n# Clarifications\\n- Parser workflow is separate from PCF Writer workflow\\n- Focus is on extracting knowledge from meetings, not creating new PCFs\\n- Summary format should be bullet points in sections for readability\"\n\nJSON OUTPUT:",
+      "description": "Generate comprehensive PCF context document with instructions, constraints, and clarifications from meeting",
+      "variables": [
+        "meeting_transcript",
+        "pcf_context",
+        "pcf_id",
+        "meeting_id",
+        "timestamp"
+      ]
+    }
+  }
+}
