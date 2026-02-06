@@ -1,10 +1,12 @@
 """FastAPI entrypoint for local tool testing."""
 from __future__ import annotations
 
+import asyncio
+import uuid
 from typing import List, Optional
 
 from dotenv import load_dotenv
-from fastapi import FastAPI, HTTPException, Query
+from fastapi import BackgroundTasks, FastAPI, HTTPException, Query
 from pydantic import BaseModel, Field
 
 from lib.context_engine import DEFAULT_PCF_TABLE
@@ -12,7 +14,6 @@ from services.code_generator.run import run as run_code_generator
 from services.code_reviewer.run import run as run_code_reviewer
 from services.pcf_parser.run import run as run_pcf_parser
 from workflows.langgraph.orchestrator.graph import workflow
-
 
 load_dotenv()
 
@@ -98,7 +99,7 @@ async def root(
             "repo_url": repo_url,
             "repo_github_id": repo_github_id,
         }
-        return await workflow.ainvoke(initial_state) 
+        return await workflow.ainvoke(initial_state)
     return {"status": "ok"}
 
 
@@ -132,7 +133,12 @@ def code_reviewer(request: CodeReviewerRequest) -> dict:
 
 @app.post("/tools/pcf-parser")
 def pcf_parser(request: PcfParserRequest) -> dict:
-    if not request.message and not request.pcf_record_id and not request.transcript and not request.meeting_record_id:
+    if (
+        not request.message
+        and not request.pcf_record_id
+        and not request.transcript
+        and not request.meeting_record_id
+    ):
         raise HTTPException(
             status_code=400,
             detail="message, pcf_record_id, transcript, or meeting_record_id is required",
@@ -148,8 +154,22 @@ def pcf_parser(request: PcfParserRequest) -> dict:
     )
 
 
+async def _run_brain_workflow(initial_state: dict) -> None:
+    """
+    Runs the workflow in the background.
+
+    IMPORTANT:
+    - We catch exceptions here because Airtable will no longer be waiting for the response.
+    - Replace print() with your logger if you have one.
+    """
+    try:
+        await workflow.ainvoke(initial_state)
+    except Exception as e:
+        print("brain workflow failed:", repr(e))
+
+
 @app.post("/brain")
-async def brain(request: BrainRequest) -> dict:
+async def brain(request: BrainRequest, background_tasks: BackgroundTasks) -> dict:
     if (
         not request.message
         and not request.pcf_record_id
@@ -187,4 +207,15 @@ async def brain(request: BrainRequest) -> dict:
     if request.context_files:
         initial_state["context_files"] = request.context_files
 
-    return await workflow.ainvoke(initial_state)  
+    # Generate a job_id so Airtable can log "sent" deterministically.
+    job_id = str(uuid.uuid4())
+
+    # BackgroundTasks expects a sync callable. We schedule the async work using asyncio.create_task.
+    def _kickoff() -> None:
+        asyncio.create_task(_run_brain_workflow(initial_state))
+
+    background_tasks.add_task(_kickoff)
+
+    # Return immediately so Airtable doesn't time out.
+    # 202 is the most semantically correct, but returning 200 also works.
+    return {"status": "accepted", "job_id": job_id}
