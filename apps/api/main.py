@@ -210,9 +210,14 @@ async def brain(request: BrainRequest, background_tasks: BackgroundTasks) -> dic
     # Generate a job_id so Airtable can log "sent" deterministically.
     job_id = str(uuid.uuid4())
 
-    # BackgroundTasks expects a sync callable. We schedule the async work using asyncio.create_task.
+    # BackgroundTasks expects a sync callable. We run the async work in a fresh loop when needed.
     def _kickoff() -> None:
-        asyncio.create_task(_run_brain_workflow(initial_state))
+        try:
+            loop = asyncio.get_running_loop()
+        except RuntimeError:
+            asyncio.run(_run_brain_workflow(initial_state))
+        else:
+            loop.create_task(_run_brain_workflow(initial_state))
 
     background_tasks.add_task(_kickoff)
 
